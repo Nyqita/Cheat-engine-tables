@@ -6,14 +6,19 @@ Author(s)
 		https://forum.cheatengine.org/profile.php?mode=viewprofile&u=528606
 		https://fearlessrevolution.com/memberlist.php?mode=viewprofile&u=30204
 Current table version
-	1.0 -- 2019-06-27 18:18:43 (UTC)
+	1.1 -- 2019-06-27 21:42:27 (UTC)
+		https://gitlab.com/Nyqita/cheat-engine-tables/blob/master/games/final_fantasy_7/Final%20Fantasy%207%20by%20Nyqita%20V1-1.CT
 Changelog
+	Version 1.1
+		Minor bug fixes
+			Problem with cheat table not initialising the first time you try to activate it has been fixed
 	Version 1.0
 		Most aspects of the cheat table support English, French, Spanish, and German
 			Note: Most text was translated using Google Translate - https://translate.google.co.uk/
 			This means there will inevitably be many examples of incoherent text in the other languages
 		Most cheat scripts and tables are tested and working correctly on all Steam versions that I had access to (FF7_EN, FF7_FR, FF7_ES, FF7_DE) and on each PlayStation version running on each supported emulator
 		Posted to fearlessrevolution.com
+			https://fearlessrevolution.com/viewtopic.php?f=4&t=9748
 Currently supported game versions and emulators
 	Supported emulators
 		RetroArch v1.7.7 cores
@@ -436,6 +441,9 @@ Known issues
 	TTreeNodes.GetNodeFromIndex Index Out of Bounds error
 		If there is a suitable remedy, I will try to implement it. Until then, you can keep track of the bug report at the official Cheat Engine forums
 		https://forum.cheatengine.org/viewtopic.php?t=610281
+	Version 1.0
+		Table doesn't activate upon first attempt, but will activate without issue all subsequent times
+			Fixed in 1.1 and beyond
 Potential questions
 	Why have you put all the LUA code in the enable section of the initialisation script, rather than in the autorun portion of the script, or in an automatic script when the cheat table is loaded?
 		I feel more comfortable knowing that nothing in the table will run without the user first having a chance to look through all the code first. I'm sure most people won't take much interest, but for those who want to look through to check there's nothing potentially malicious, they're able to do so before their first use
@@ -444,6 +452,8 @@ Potential questions
 		The table is compatible with the PlayStation 1 International Japanese version, but I doubt that I'll be able to implement full language support for it. For now, it defaults to displaying the whole table in English (including using the English names for all items, weapons, etc.). From what I've read, the Japanese version of the game uses significantly different text encoding, and it would be far more complicated to support Japanese than for languages that use the Latin alphabet
 		For further reading, please consult the qhimm.com wiki article on text encoding:
 		http://web.archive.org/web/20161006234528/http://wiki.qhimm.com/view/FF7/Text_encoding
+	Why have you attached the cheat table inside an archive instead of uploading it uncompressed?
+		Every one of my attempts to attach the original .CT file to the forum thread resulted in "Error parsing server response". A post in another thread mentioned this problem can be avoided by simply putting the file into an unencrypted archive
 Final notes
 	During the minification process, the comments made in the LUA scripts have been removed. These comments provided links to references and source materials for all the code I used that was written by someone else, or a resource I used that helped me to understand some aspects of the game. The unminified versions can be found on the GitHub or GitLab pages mentioned in the Authors section, near the beginning of the document
 	If you visit those pages, you can find the URLs to the sources or reference materials in the various code comments (typically just after the function declaration). I also referenced various threads on the qhimm.com forums and wiki that were very helpful in understanding some of the game mechanics (especially chocobo stats)

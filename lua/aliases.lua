@@ -1,0 +1,9 @@
+-- Function aliases
+dp = debugPrint
+tbs = to_byte_string
+lcm = lazy_child_maker
+lcd = lazy_child_deleter
+lwt = lazy_write_timer
+hx = to_hex_string
+nb = number_bases
+ps = string.pstring

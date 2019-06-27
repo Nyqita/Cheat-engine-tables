@@ -133,6 +133,7 @@ function init()
     root_dir .. 'lua/lazy',
     root_dir .. 'lua/strings',
     root_dir .. 'lua/tables',
+    root_dir .. 'lua/aliases',
   }
   dofile(root_dir .. 'lua/debug.lua')
   for i = 1, #required_files do
@@ -253,15 +254,5 @@ s_en = "[Enable]\n"
 s_dis = "[Disable]\n"
 s_lua = "{$lua}\n"
 s_asm = "{$asm}\n"
-
--- Function aliases
-dp = debugPrint
-tbs = to_byte_string
-lcm = lazy_child_maker
-lcd = lazy_child_deleter
-lwt = lazy_write_timer
-hx = to_hex_string
-nb = number_bases
-ps = string.pstring
 
 -- STOP_INCLUDE
