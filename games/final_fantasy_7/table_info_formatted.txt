@@ -14,7 +14,8 @@ Changelog
 |  |  Minor bug fixes
 |  |  |  Cheat table initialisation script not activating the first time you try to enable it, but
 |  |  |  ··· activating all subsequent times
-|  |  Updating and reformatting documentation
+|  |  Updated and reformatted documentation
+|  |  Added a few missing translations
 |  Version 1.0
 |  |  Most aspects of the cheat table support English, French, Spanish, and German
 |  |  |  Note: Most text was translated using Google Translate - https://translate.google.co.uk/
