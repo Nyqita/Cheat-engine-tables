@@ -3,8 +3,7 @@
   <CheatEntries>
     <CheatEntry>
       <ID>4931</ID>
-      <Description>"Activate / Activar / Activer / Aktivieren"</Description>
-      <Options moHideChildren="1"/>
+      <Description>"Activate / Activar / Activer / Aktivieren / 有効にする"</Description>
       <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>[ENABLE]
@@ -28,7 +27,8 @@ Changelog
 |  |  Minor bug fixes
 |  |  |  Cheat table initialisation script not activating the first time you try to enable it, but
 |  |  |  ··· activating all subsequent times
-|  |  Updating and reformatting documentation
+|  |  Updated and reformatted documentation
+|  |  Added a few missing translations
 |  Version 1.0
 |  |  Most aspects of the cheat table support English, French, Spanish, and German
 |  |  |  Note: Most text was translated using Google Translate - https://translate.google.co.uk/
@@ -634,7 +634,8 @@ Final notes
 |  ··· as not removing any authors from the documentation. If you make any significant changes, then
 |  ··· please consider adding yourself to the Authors section
 |  Thank you for taking the time to read. I hope you find this helpful, and that you're looking
-|  ··· forward to the Final Fantasy 7 Remake as much as I am :)]]
+|  ··· forward to the Final Fantasy 7 Remake as much as I am :)
+]]
 function checkCriteria(a, b, c, d)
 local e = type(a)
 local f, g;
@@ -1014,13 +1015,13 @@ a_ = R + aQ + A[q][1]
 b0 = A[q][2]
 debugPrint(5, "Address : " .. nb(a_) .. "  Value : " .. nb(b0), nil, "lazyWriteTimer")
 if aY == 1 then writeSmallInteger(a_, b0) elseif aY == 2 then writeInteger(a_,
-b0) elseif aY == 3 then writeQword(a_, b0) else writeBytes(a_, to_byte_string(b0)) end
+  b0) elseif aY == 3 then writeQword(a_, b0) else writeBytes(a_, to_byte_string(b0)) end
 end else for q = 0, aP - 1 do
 a_ = R + aQ + aR * q;
 b0 = aT + aU * q;
 debugPrint(5, "Address : " .. nb(a_) .. "  Value : " .. nb(b0), nil, "lazyWriteTimer")
 if aY == 1 then writeSmallInteger(a_, b0) elseif aY == 2 then writeInteger(a_,
-b0) elseif aY == 3 then writeQword(a_, b0) else writeBytes(a_, to_byte_string(b0)) end
+  b0) elseif aY == 3 then writeQword(a_, b0) else writeBytes(a_, to_byte_string(b0)) end
 end end
 end;
 return aZ
@@ -1418,12 +1419,12 @@ debugPrint(5, "Outer loop iteration : " .. q, nil, "create_shaped_table")
 local cH = {}
 for C, D in pairs(br[q]) do
 debugPrint(7, "Current key : " .. tostring(C) .. "  Type : " .. type(C) .. "  Value : " .. tostring(D), nil,
-"create_shaped_table")
+    "create_shaped_table")
 local cI;
 if cF and type(C) == "number" then local cJ elseif type(C) == "string" and cG then cI = string.lower(C) else cI = C end ;
 if cI then
-debugPrint(7, "New key : " .. tostring(cI), nil, "create_shaped_table")
-cH[cI] = D
+  debugPrint(7, "New key : " .. tostring(cI), nil, "create_shaped_table")
+  cH[cI] = D
 end
 end ;
 for a2 = 1, #br.shape do
@@ -1432,12 +1433,12 @@ local cK = br[q][a2]
 local cL = br.shape[a2]
 local cM;
 debugPrint(7,
-"Key : {" .. type(cL) .. "} [" .. cL .. "]  Value : (" .. type(cK) .. ") &lt;" .. string.pstring(cK) .. "&gt;",
-nil, "create_shaped_table")
+    "Key : {" .. type(cL) .. "} [" .. cL .. "]  Value : (" .. type(cK) .. ") &lt;" .. string.pstring(cK) .. "&gt;",
+    nil, "create_shaped_table")
 if cG then cM = string.lower(cL) else cM = cL end ;
 debugPrint(7,
-"Setting new key : {" .. type(cM) .. "} [" .. cM .. "]  Value : (" .. type(cK) .. ") &lt;" .. string.pstring(cK) .. "&gt;",
-nil, "create_shaped_table")
+    "Setting new key : {" .. type(cM) .. "} [" .. cM .. "]  Value : (" .. type(cK) .. ") &lt;" .. string.pstring(cK) .. "&gt;",
+    nil, "create_shaped_table")
 cH[cM] = cK
 end ;
 for C, D in pairs(br.shape) do cH[C] = D end ;
@@ -1686,6 +1687,14 @@ end ;
 return true
 end;
 table.print = recursive_print;
+dp = debugPrint;
+tbs = to_byte_string;
+lcm = lazy_child_maker;
+lcd = lazy_child_deleter;
+lwt = lazy_write_timer;
+hx = to_hex_string;
+nb = number_bases;
+ps = string.pstring;
 force_lang = nil;
 current_lang = "eng"
 weapon_stats = {}
@@ -2032,7 +2041,7 @@ writeBytes(dD, val)
 end
 end;
 rgb_themes = { { ["title"] = "Default Menu", ["author"] = "unknown", ["tl"] = { ["r"] = 0, ["g"] = 0, ["b"] = 176 }, ["bl"] = { ["r"] = 0, ["g"] = 0, ["b"] = 80 }, ["tr"] = { ["r"] = 0, ["g"] = 0, ["b"] = 128 }, ["br"] = { ["r"] = 0, ["g"] = 0, ["b"] = 32 } }, { ["title"] = "Aeris' Flowers", ["author"] = "Bijutsu Sensei", ["tl"] = { ["r"] = 255, ["g"] = 255, ["b"] = 0 }, ["bl"] = { ["r"] = 255, ["g"] = 255, ["b"] = 255 }, ["tr"] = { ["r"] = 255, ["g"] = 276, ["b"] = 88 }, ["br"] = { ["r"] = 255, ["g"] = 176, ["b"] = 0 } }, { ["title"] = "Aqualung", ["author"] = "Bijutsu Sensei", ["tl"] = { ["r"] = 0, ["g"] = 50, ["b"] = 175 }, ["bl"] = { ["r"] = 0, ["g"] = 0, ["b"] = 255 }, ["tr"] = { ["r"] = 0, ["g"] = 200, ["b"] = 255 }, ["br"] = { ["r"] = 0, ["g"] = 50, ["b"] = 175 } }, { ["title"] = "Auron's Robe", ["author"] = "des kr", ["tl"] = { ["r"] = 120, ["g"] = 0, ["b"] = 0 }, ["bl"] = { ["r"] = 80, ["g"] = 0, ["b"] = 0 }, ["tr"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 }, ["br"] = { ["r"] = 150, ["g"] = 150, ["b"] = 0 } }, { ["title"] = "Aurora Borealis", ["author"] = "Kong K Rool", ["tl"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 }, ["bl"] = { ["r"] = 81, ["g"] = 0, ["b"] = 255 }, ["tr"] = { ["r"] = 255, ["g"] = 111, ["b"] = 111 }, ["br"] = { ["r"] = 173, ["g"] = 197, ["b"] = 0 } }, { ["title"] = "Beam of Darkness", ["author"] = "Legend_Saber", ["tl"] = { ["r"] = 27, ["g"] = 135, ["b"] = 30 }, ["bl"] = { ["r"] = 0, ["g"] = 33, ["b"] = 0 }, ["tr"] = { ["r"] = 0, ["g"] = 33, ["b"] = 0 }, ["br"] = { ["r"] = 27, ["g"] = 135, ["b"] = 30 } }, { ["title"] = "Black Waltz", ["author"] = "des kr", ["tl"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 }, ["bl"] = { ["r"] = 0, ["g"] = 0, ["b"] = 60 }, ["tr"] = { ["r"] = 255, ["g"] = 255, ["b"] = 255 }, ["br"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 } }, { ["title"] = "Blue Moon", ["author"] = "shawNe0", ["tl"] = { ["r"] = 0, ["g"] = 0, ["b"] = 000 }, ["bl"] = { ["r"] = 49, ["g"] = 67, ["b"] = 115 }, ["tr"] = { ["r"] = 36, ["g"] = 88, ["b"] = 255 }, ["br"] = { ["r"] = 68, ["g"] = 255, ["b"] = 255 } }, { ["title"] = "Catastrophe", ["author"] = "Legend_Saber", ["tl"] = { ["r"] = 35, ["g"] = 0, ["b"] = 0 }, ["bl"] = { ["r"] = 36, ["g"] = 0, ["b"] = 0 }, ["tr"] = { ["r"] = 95, ["g"] = 0, ["b"] = 0 }, ["br"] = { ["r"] = 1, ["g"] = 0, ["b"] = 32 } }, { ["title"] = "Chocobo Plains", ["author"] = "Legend_Saber", ["tl"] = { ["r"] = 100, ["g"] = 106, ["b"] = 0 }, ["bl"] = { ["r"] = 50, ["g"] = 57, ["b"] = 0 }, ["tr"] = { ["r"] = 50, ["g"] = 64, ["b"] = 0 }, ["br"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 } }, { ["title"] = "Clash of the Elements", ["author"] = "Shadow Flare", ["tl"] = { ["r"] = 105, ["g"] = 12, ["b"] = 37 }, ["bl"] = { ["r"] = 35, ["g"] = 35, ["b"] = 35 }, ["tr"] = { ["r"] = 45, ["g"] = 45, ["b"] = 45 }, ["br"] = { ["r"] = 37, ["g"] = 12, ["b"] = 105 } }, { ["title"] = "Cosmo Candle", ["author"] = "Bijutsu Sensei", ["tl"] = { ["r"] = 175, ["g"] = 50, ["b"] = 0 }, ["bl"] = { ["r"] = 255, ["g"] = 200, ["b"] = 0 }, ["tr"] = { ["r"] = 50, ["g"] = 0, ["b"] = 0 }, ["br"] = { ["r"] = 120, ["g"] = 0, ["b"] = 0 } }, { ["title"] = "Dark Light", ["author"] = "Majin Legacy", ["tl"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 }, ["bl"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 }, ["tr"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 }, ["br"] = { ["r"] = 128, ["g"] = 128, ["b"] = 128 } }, { ["title"] = "Dark Side of the Moon", ["author"] = "des kr", ["tl"] = { ["r"] = 122, ["g"] = 0, ["b"] = 0 }, ["bl"] = { ["r"] = 150, ["g"] = 150, ["b"] = 0 }, ["tr"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 }, ["br"] = { ["r"] = 0, ["g"] = 0, ["b"] = 62 } }, { ["title"] = "Earth Colors", ["author"] = "deathguise950", ["tl"] = { ["r"] = 0, ["g"] = 120, ["b"] = 255 }, ["bl"] = { ["r"] = 90, ["g"] = 60, ["b"] = 0 }, ["tr"] = { ["r"] = 0, ["g"] = 130, ["b"] = 0 }, ["br"] = { ["r"] = 90, ["g"] = 60, ["b"] = 0 } }, { ["title"] = "Egokiller801's Preset", ["author"] = "Egokiller801", ["tl"] = { ["r"] = 0, ["g"] = 166, ["b"] = 166 }, ["tr"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 }, ["bl"] = { ["r"] = 88, ["g"] = 0, ["b"] = 112 }, ["br"] = { ["r"] = 255, ["g"] = 137, ["b"] = 043 } }, { ["title"] = "Eternal Rainbow", ["author"] = "The Yellow Mage", ["tl"] = { ["r"] = 255, ["g"] = 255, ["b"] = 0 }, ["tr"] = { ["r"] = 255, ["g"] = 0, ["b"] = 0 }, ["bl"] = { ["r"] = 0, ["g"] = 0, ["b"] = 255 }, ["br"] = { ["r"] = 0, ["g"] = 255, ["b"] = 0 } }, { ["title"] = "Final Fantasy X", ["author"] = "Kong K Rool", ["tl"] = { ["r"] = 105, ["g"] = 189, ["b"] = 235 }, ["bl"] = { ["r"] = 105, ["g"] = 189, ["b"] = 235 }, ["tr"] = { ["r"] = 205, ["g"] = 205, ["b"] = 122 }, ["br"] = { ["r"] = 236, ["g"] = 179, ["b"] = 255 } }, { ["title"] = "From the Abyss", ["author"] = "Shadow Flare", ["tl"] = { ["r"] = 95, ["g"] = 0, ["b"] = 140 }, ["bl"] = { ["r"] = 16, ["g"] = 28, ["b"] = 16 }, ["tr"] = { ["r"] = 20, ["g"] = 35, ["b"] = 20 }, ["br"] = { ["r"] = 76, ["g"] = 0, ["b"] = 10 } }, { ["title"] = "Golden Ray", ["author"] = "sonicboom52591", ["tl"] = { ["r"] = 255, ["g"] = 255, ["b"] = 255 }, ["bl"] = { ["r"] = 85, ["g"] = 84, ["b"] = 0 }, ["tr"] = { ["r"] = 85, ["g"] = 84, ["b"] = 0 }, ["br"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 } }, { ["title"] = "Holy Unleashed", ["author"] = "BlackDoom", ["tl"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 }, ["bl"] = { ["r"] = 255, ["g"] = 255, ["b"] = 255 }, ["tr"] = { ["r"] = 125, ["g"] = 100, ["b"] = 30 }, ["br"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 } }, { ["title"] = "Icy Fields", ["author"] = "Bijutsu Sensei", ["tl"] = { ["r"] = 255, ["g"] = 255, ["b"] = 255 }, ["bl"] = { ["r"] = 0, ["g"] = 88, ["b"] = 129 }, ["tr"] = { ["r"] = 0, ["g"] = 88, ["b"] = 176 }, ["br"] = { ["r"] = 0, ["g"] = 255, ["b"] = 255 } }, { ["title"] = "Lifestream Rainbow", ["author"] = "Bijutsu Sensei", ["tl"] = { ["r"] = 255, ["g"] = 255, ["b"] = 175 }, ["bl"] = { ["r"] = 0, ["g"] = 200, ["b"] = 255 }, ["tr"] = { ["r"] = 50, ["g"] = 100, ["b"] = 128 }, ["br"] = { ["r"] = 255, ["g"] = 175, ["b"] = 255 } }, { ["title"] = "Light of Darkness", ["author"] = "Final_Valkyrie", ["tl"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 }, ["bl"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 }, ["tr"] = { ["r"] = 100, ["g"] = 100, ["b"] = 100 }, ["br"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 } }, { ["title"] = "HH_King's Preset", ["author"] = "HH_King", ["tl"] = { ["r"] = 45, ["g"] = 44, ["b"] = 27 }, ["tr"] = { ["r"] = 58, ["g"] = 44, ["b"] = 57 }, ["bl"] = { ["r"] = 89, ["g"] = 44, ["b"] = 57 }, ["br"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 } }, { ["title"] = "Midgar Lights", ["author"] = "Cloudii_17", ["tl"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 }, ["bl"] = { ["r"] = 0, ["g"] = 200, ["b"] = 0 }, ["tr"] = { ["r"] = 255, ["g"] = 255, ["b"] = 255 }, ["br"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 } }, { ["title"] = "The Newspaper", ["author"] = "xoxJayoxo", ["tl"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 }, ["bl"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 }, ["tr"] = { ["r"] = 45, ["g"] = 45, ["b"] = 45 }, ["br"] = { ["r"] = 150, ["g"] = 150, ["b"] = 150 } }, { ["title"] = "New World Order", ["author"] = "Shadow Flare", ["tl"] = { ["r"] = 0, ["g"] = 100, ["b"] = 100 }, ["bl"] = { ["r"] = 40, ["g"] = 40, ["b"] = 40 }, ["tr"] = { ["r"] = 100, ["g"] = 100, ["b"] = 100 }, ["br"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 } }, { ["title"] = "Night Horizon", ["author"] = "Legend_Saber", ["tl"] = { ["r"] = 0, ["g"] = 0, ["b"] = 74 }, ["bl"] = { ["r"] = 15, ["g"] = 0, ["b"] = 0 }, ["tr"] = { ["r"] = 22, ["g"] = 0, ["b"] = 0 }, ["br"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 } }, { ["title"] = "Northern Cave", ["author"] = "Bijutsu Sensei", ["tl"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 }, ["bl"] = { ["r"] = 44, ["g"] = 176, ["b"] = 88 }, ["tr"] = { ["r"] = 44, ["g"] = 88, ["b"] = 176 }, ["br"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 } }, { ["title"] = "Once in a Blue Moon", ["author"] = "sonicboom52591", ["tl"] = { ["r"] = 0, ["g"] = 0, ["b"] = 51 }, ["bl"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 }, ["tr"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 }, ["br"] = { ["r"] = 0, ["g"] = 0, ["b"] = 55 } }, { ["title"] = "Pea Soup", ["author"] = "Kong K Rool", ["tl"] = { ["r"] = 138, ["g"] = 170, ["b"] = 0 }, ["bl"] = { ["r"] = 81, ["g"] = 112, ["b"] = 0 }, ["tr"] = { ["r"] = 98, ["g"] = 166, ["b"] = 0 }, ["br"] = { ["r"] = 173, ["g"] = 197, ["b"] = 0 } }, { ["title"] = "Purple Haze", ["author"] = "NintendoBoy259", ["tl"] = { ["r"] = 9, ["g"] = 7, ["b"] = 15 }, ["bl"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 }, ["tr"] = { ["r"] = 79, ["g"] = 61, ["b"] = 131 }, ["br"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 } }, { ["title"] = "Purple Hope", ["author"] = "sonicboom52591", ["tl"] = { ["r"] = 92, ["g"] = 0, ["b"] = 122 }, ["bl"] = { ["r"] = 139, ["g"] = 0, ["b"] = 119 }, ["tr"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 }, ["br"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 } }, { ["title"] = "Purple Rays", ["author"] = "Shadow Flare", ["tl"] = { ["r"] = 111, ["g"] = 0, ["b"] = 135 }, ["bl"] = { ["r"] = 0, ["g"] = 40, ["b"] = 0 }, ["tr"] = { ["r"] = 0, ["g"] = 27, ["b"] = 0 }, ["br"] = { ["r"] = 99, ["g"] = 0, ["b"] = 120 } }, { ["title"] = "Sepia Horizon", ["author"] = "Legend_Saber", ["tl"] = { ["r"] = 60, ["g"] = 18, ["b"] = 0 }, ["bl"] = { ["r"] = 15, ["g"] = 0, ["b"] = 0 }, ["tr"] = { ["r"] = 22, ["g"] = 0, ["b"] = 0 }, ["br"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 } }, { ["title"] = "Seto's Spirit", ["author"] = "zombieluzz", ["tl"] = { ["r"] = 95, ["g"] = 0, ["b"] = 95 }, ["bl"] = { ["r"] = 80, ["g"] = 40, ["b"] = 20 }, ["tr"] = { ["r"] = 105, ["g"] = 30, ["b"] = 75 }, ["br"] = { ["r"] = 90, ["g"] = 50, ["b"] = 0 } }, { ["title"] = "Silver Edge", ["author"] = "Legend_Saber", ["tl"] = { ["r"] = 129, ["g"] = 128, ["b"] = 128 }, ["bl"] = { ["r"] = 1, ["g"] = 0, ["b"] = 0 }, ["tr"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 }, ["br"] = { ["r"] = 129, ["g"] = 129, ["b"] = 129 } }, { ["title"] = "Silver Landscape", ["author"] = "Legend_Saber", ["tl"] = { ["r"] = 92, ["g"] = 95, ["b"] = 91 }, ["tr"] = { ["r"] = 91, ["g"] = 88, ["b"] = 91 }, ["bl"] = { ["r"] = 80, ["g"] = 80, ["b"] = 80 }, ["br"] = { ["r"] = 31, ["g"] = 32, ["b"] = 32 } }, { ["title"] = "Simple &amp; Elegant", ["author"] = "Tyrant_Wave", ["tl"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 }, ["bl"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 }, ["tr"] = { ["r"] = 233, ["g"] = 233, ["b"] = 233 }, ["br"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 } }, { ["title"] = "Sprite", ["author"] = "Kong K Rool", ["tl"] = { ["r"] = 115, ["g"] = 115, ["b"] = 190 }, ["tr"] = { ["r"] = 0, ["g"] = 0, ["b"] = 190 }, ["bl"] = { ["r"] = 0, ["g"] = 187, ["b"] = 0 }, ["br"] = { ["r"] = 115, ["g"] = 187, ["b"] = 115 } }, { ["title"] = "Starlight Ray", ["author"] = "Sephiru", ["tl"] = { ["r"] = 000, ["g"] = 000, ["b"] = 000 }, ["bl"] = { ["r"] = 041, ["g"] = 020, ["b"] = 071 }, ["tr"] = { ["r"] = 019, ["g"] = 020, ["b"] = 042 }, ["br"] = { ["r"] = 000, ["g"] = 000, ["b"] = 000 } }, { ["title"] = "Strawberry Banana", ["author"] = "Kong K Rool", ["tl"] = { ["r"] = 150, ["g"] = 20, ["b"] = 20 }, ["bl"] = { ["r"] = 150, ["g"] = 20, ["b"] = 20 }, ["tr"] = { ["r"] = 255, ["g"] = 150, ["b"] = 150 }, ["br"] = { ["r"] = 255, ["g"] = 255, ["b"] = 0 } }, { ["title"] = "Sunkist", ["author"] = "Kong K Rool", ["tl"] = { ["r"] = 255, ["g"] = 105, ["b"] = 75 }, ["bl"] = { ["r"] = 0, ["g"] = 0, ["b"] = 100 }, ["tr"] = { ["r"] = 0, ["g"] = 144, ["b"] = 118 }, ["br"] = { ["r"] = 255, ["g"] = 105, ["b"] = 75 } }, { ["title"] = "Terracotta", ["author"] = "Kong K Rool", ["tl"] = { ["r"] = 145, ["g"] = 82, ["b"] = 45 }, ["bl"] = { ["r"] = 189, ["g"] = 60, ["b"] = 39 }, ["tr"] = { ["r"] = 214, ["g"] = 142, ["b"] = 95 }, ["br"] = { ["r"] = 155, ["g"] = 86, ["b"] = 70 } }, { ["title"] = "The Planet's Dream", ["author"] = "sonicboom52591", ["tl"] = { ["r"] = 75, ["g"] = 50, ["b"] = 0 }, ["bl"] = { ["r"] = 51, ["g"] = 0, ["b"] = 84 }, ["tr"] = { ["r"] = 151, ["g"] = 38, ["b"] = 255 }, ["br"] = { ["r"] = 201, ["g"] = 32, ["b"] = 6 } }, { ["title"] = "This Guy Are Sick", ["author"] = "Snausages", ["tl"] = { ["r"] = 0, ["g"] = 175, ["b"] = 135 }, ["bl"] = { ["r"] = 0, ["g"] = 0, ["b"] = 75 }, ["tr"] = { ["r"] = 0, ["g"] = 100, ["b"] = 130 }, ["br"] = { ["r"] = 60, ["g"] = 0, ["b"] = 0 } }, { ["title"] = "Tiger Stripe", ["author"] = "demotbra", ["tl"] = { ["r"] = 223, ["g"] = 107, ["b"] = 0 }, ["bl"] = { ["r"] = 87, ["g"] = 38, ["b"] = 15 }, ["tr"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 }, ["br"] = { ["r"] = 255, ["g"] = 94, ["b"] = 75 } }, { ["title"] = "Venusian Sunset", ["author"] = "deathguise950", ["tl"] = { ["r"] = 110, ["g"] = 0, ["b"] = 255 }, ["bl"] = { ["r"] = 100, ["g"] = 0, ["b"] = 110 }, ["tr"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 }, ["br"] = { ["r"] = 255, ["g"] = 0, ["b"] = 0 } }, { ["title"] = "Vincent's Blood", ["author"] = "Bijutsu Sensei", ["tl"] = { ["r"] = 0, ["g"] = 0, ["b"] = 0 }, ["bl"] = { ["r"] = 80, ["g"] = 0, ["b"] = 0 }, ["tr"] = { ["r"] = 75, ["g"] = 0, ["b"] = 0 }, ["br"] = { ["r"] = 200, ["g"] = 0, ["b"] = 0 } }, { ["title"] = "Wutai Sky", ["author"] = "Bijutsu Sensei", ["tl"] = { ["r"] = 0, ["g"] = 50, ["b"] = 175 }, ["bl"] = { ["r"] = 0, ["g"] = 200, ["b"] = 255 }, ["tr"] = { ["r"] = 0, ["g"] = 130, ["b"] = 215 }, ["br"] = { ["r"] = 255, ["g"] = 255, ["b"] = 255 } }, { ["title"] = "Xbox Bios Theme", ["author"] = "jamiedude10", ["tl"] = { ["r"] = 171, ["g"] = 171, ["b"] = 70 }, ["bl"] = { ["r"] = 133, ["g"] = 255, ["b"] = 51 }, ["tr"] = { ["r"] = 0, ["g"] = 93, ["b"] = 57 }, ["br"] = { ["r"] = 0, ["g"] = 175, ["b"] = 57 } } }
-table_names = { ['placeholders'] = { ['def]'] = "placeholder_name", ["eng"] = "Placeholder Name", ['fre'] = "Nom_d'espace_réservé", ['ger'] = "Platzhaltername", ['spa'] = "Nombre_del_marcador_de_posición", ['jap'] = "プレースホルダ名" }, { ['def'] = "&lt;accessory_stats_script&gt;", ['eng'] = "Accessory attributes", ['fre'] = "Attributs accessoires", ['ger'] = "Zusatzattribute", ['spa'] = "Atributos accesorios" }, { ['def'] = "&lt;armour_stats_script&gt;", ['eng'] = "Armour attributes", ['fre'] = "Attributs d'armure", ['ger'] = "Rüstungsattribute", ['spa'] = "Atributos de armadura" }, { ['def'] = "&lt;battle_arena_points&gt;", ['eng'] = "Battle points (while in arena)", ['fre'] = "Points de bataille (dans l'arène)", ['ger'] = "Kampfpunkte (in der Arena)", ['spa'] = "Puntos de batalla (en la arena)" }, { ['def'] = "&lt;battle_items_script&gt;", ['eng'] = "In-battle items", ['fre'] = "Articles de combat", ['ger'] = "Kampfgegenstände", ['spa'] = "Objetos de batalla" }, { ['def'] = "&lt;battle_points&gt;", ['eng'] = "Battle points", ['fre'] = "Points de bataille", ['ger'] = "Kampfpunkte", ['spa'] = "Puntos de batalla" }, { ['def'] = "&lt;battle_stats_script&gt;", ['eng'] = "In-battle stats", ['fre'] = "Statistiques de combat", ['ger'] = "Kampfstatistiken", ['spa'] = "Estadísticas de batalla" }, { ['def'] = "&lt;battles_entered&gt;", ['eng'] = "Battles fought", ['fre'] = "Batailles livrées", ['ger'] = "Schlachten kämpften", ['spa'] = "Batallas peleadas" }, { ['def'] = "&lt;battles_fled&gt;", ['eng'] = "Battles escaped", ['fre'] = "Batailles échappées", ['ger'] = "Schlachten entkamen", ['spa'] = "Batallas escapadas" }, { ['def'] = "&lt;cheats_menu&gt;", ['eng'] = "Cheats", ['fre'] = "Cheats", ['ger'] = "Betrügt", ['spa'] = "Guiones de trucos" }, { ['def'] = "&lt;chocobo_stats_script&gt;", ['eng'] = "Chocobo attributes", ['fre'] = "Attributs de chocobo", ['ger'] = "Chocobo-Attribute", ['spa'] = "Atributos de chocobo" }, { ['def'] = "&lt;config_menu_menu&gt;", ['eng'] = "Config menu", ['fre'] = "Menu de configuration", ['ger'] = "Konfigurationsmenü", ['spa'] = "Menú de configuración" }, { ['def'] = "&lt;current_roster_menu&gt;", ['eng'] = "Current roster", ['fre'] = "Liste actuelle", ['ger'] = "Aktueller Dienstplan", ['spa'] = "Lista actual" }, { ['def'] = "&lt;debug_mode_menu&gt;", ['eng'] = "Built-in debug mode", ['fre'] = "Mode de débogage intégré", ['ger'] = "Eingebauter Debug-Modus", ['spa'] = "Modo de depuración incorporado" }, { ['def'] = "&lt;displayed_stats&gt;", ['eng'] = "Displayed stats (not real)", ['fre'] = "Statistiques affichées (non réelles)", ['ger'] = "Angezeigte Statistiken (nicht real)", ['spa'] = "Estadísticas mostradas (no reales)" }, { ['def'] = "&lt;in_battle_cheats&gt;", ['eng'] = "In-battle cheats", ['fre'] = "Cheats en combat", ['ger'] = "Cheats im Kampf", ['spa'] = "Trucos en la batalla" }, { ['def'] = "&lt;inventory_cheats&gt;", ['eng'] = "Inventory cheats", ['fre'] = "Astuces d'inventaire", ['ger'] = "Inventar betrügt", ['spa'] = "Trampas de inventario" }, { ['def'] = "&lt;inventory_menu&gt;", ['eng'] = "Inventory", ['fre'] = "Inventaire", ['ger'] = "Inventar", ['spa'] = "Inventario" }, { ['def'] = "&lt;materia_script&gt;", ['eng'] = "Materia", ['fre'] = "Materia", ['ger'] = "Materia", ['spa'] = "Materia" }, { ['def'] = "&lt;menu_access&gt;", ['eng'] = "Menu options availability", ['fre'] = "Disponibilité des options de menu", ['ger'] = "Menüoptionen Verfügbarkeit", ['spa'] = "Opciones de menú disponibles" }, { ['def'] = "&lt;menu_items_script&gt;", ['eng'] = "Menu items", ['fre'] = "Articles de menu", ['ger'] = "Menüpunkte", ['spa'] = "Elementos de menú" }, { ['def'] = "&lt;misc_cheats&gt;", ['eng'] = "Miscellaneous cheats", ['fre'] = "Diverses astuces", ['ger'] = "Verschiedene Cheats", ['spa'] = "Tramposos varios" }, { ['def'] = "&lt;misc_menu&gt;", ['eng'] = "Miscellaneous", ['fre'] = "Divers", ['ger'] = "Verschiedenes", ['spa'] = "Opciones misceláneas" }, { ['def'] = "&lt;post_battle_menu&gt;", ['eng'] = "Post-battle rewards", ['fre'] = "Récompenses après la bataille", ['ger'] = "Belohnungen nach dem Kampf", ['spa'] = "Récompenses après la bataille" }, { ['def'] = "&lt;random_battle_cheats&gt;", ['eng'] = "Random encounter frequency", ['fre'] = "Fréquence de rencontre aléatoire", ['ger'] = "Zufällige Begegnungsfrequenz", ['spa'] = "Frecuencia de encuentro aleatorio" }, { ['def'] = "&lt;random_battle_menu&gt;", ['eng'] = "Random encounter settings", ['fre'] = "Paramètres de rencontre aléatoires", ['ger'] = "Einstellungen für zufällige Begegnungen", ['spa'] = "Configuración de encuentro aleatorio" }, { ['def'] = "&lt;random_battle_world_map_can_occur&gt;", ['eng'] = "Can random encounters occur?", ['fre'] = "Des rencontres aléatoires peuvent-elles se produire?", ['ger'] = "Können zufällige Begegnungen auftreten?", ['spa'] = "¿Pueden ocurrir encuentros al azar?" }, { ['def'] = "&lt;random_battle_world_map_counter&gt;", ['eng'] = "Random encounter loops counter", ['fre'] = "Compteur de boucles de rencontres aléatoires", ['ger'] = "Zähler für zufällige Begegnungsschleifen", ['spa'] = "Contador de bucles de encuentro aleatorio" }, { ['def'] = "&lt;random_battle_world_map_distance&gt;", ['eng'] = "Distance until encounters can occur", ['fre'] = "Distance jusqu'à la rencontre peut se produire", ['ger'] = "Entfernung, bis Begegnungen auftreten können", ['spa'] = "Distancia hasta que puedan ocurrir encuentros." }, { ['def'] = "&lt;random_battle_world_map_loop&gt;", ['eng'] = "Random encounter looping ticker", ['fre'] = "Rencontre aléatoire boucle ticker", ['ger'] = "Zufälliger Loop-Ticker für Begegnungen", ['spa'] = "Ticker de bucle encuentro aleatorio" }, { ['def'] = "&lt;random_battle_field_map_loop&gt;", ['eng'] = "Random encounter looping ticker", ['fre'] = "Rencontre aléatoire boucle ticker", ['ger'] = "Zufälliger Loop-Ticker für Begegnungen", ['spa'] = "Ticker de bucle encuentro aleatorio" }, { ['def'] = "&lt;real_stats_by_char&gt;", ['eng'] = "Real stats (sorted by character)", ['fre'] = "Statistiques réelles (triées par caractère)", ['ger'] = "Echte Statistiken (sortiert nach Charakter)", ['spa'] = "Estadísticas reales (ordenadas por personaje)" }, { ['def'] = "&lt;real_stats_by_stat&gt;", ['eng'] = "Real stats (sorted by stat)", ['fre'] = "Statistiques réelles (triées par statistiques)", ['ger'] = "Echte Statistiken (sortiert nach Statistik)", ['spa'] = "Estadísticas reales (ordenadas por estadística)" }, { ['def'] = "&lt;save_phs&gt;", ['eng'] = "Save &amp; PHS availability", ['fre'] = "Enregistrer et disponibilité PHS", ['ger'] = "Sparen Sie &amp; PHS Verfügbarkeit", ['spa'] = "Guardar y disponibilidad de PHS" }, { ['def'] = "&lt;set_debug_level&gt;", ['eng'] = "Set debugging level", ['fre'] = "Définir le niveau de débogage", ['ger'] = "Festlegen der Debugstufe", ['spa'] = "Establecer nivel de depuración" }, { ['def'] = "&lt;stats_menu&gt;", ['eng'] = "Statistics", ['fre'] = "Statistiques", ['ger'] = "Statistiken", ['spa'] = "Estadística" }, { ['def'] = "&lt;templates_menu&gt;", ['eng'] = "Templates menu (DO NOT RENAME OR DELETE)", ['fre'] = "Menu Modèles (NE PAS RENOMMER OU SUPPRIMER)", ['ger'] = "Vorlagen-Menü (NICHT UMBENENNEN ODER LÖSCHEN)", ['spa'] = "Menú de plantillas (NO RENOMAR NI BORRAR)" }, { ['def'] = "&lt;testing_menu&gt;", ['eng'] = "For testing", ['fre'] = "Pour tester", ['ger'] = "Zum Prüfen", ['spa'] = "Para las pruebas" }, { ['def'] = "&lt;timers_menu&gt;", ['eng'] = "Timers", ['fre'] = "Minuteries", ['ger'] = "Timer", ['spa'] = "Temporizadores" }, { ['def'] = "&lt;weapon_stats_script&gt;", ['eng'] = "Weapon attributes", ['fre'] = "Attributs d'arme", ['ger'] = "Waffenattribute", ['spa'] = "Atributos del arma" }, { ['def'] = "&lt;debug_mode_1&gt;", ['eng'] = "Current screen", ['fre'] = "Écran actuel", ['ger'] = "Aktueller Bildschirm", ['spa'] = "Pantalla actual" }, { ['def'] = "&lt;debug_mode_2&gt;", ['eng'] = "Debug mode 2", ['fre'] = "Mode débogage 2", ['ger'] = "Debug-Modus 2", ['spa'] = "Modo de depuración 2" }, { ['def'] = "&lt;infinite_items_cheat&gt;", ['eng'] = "Have all menu items with infinite uses", ['fre'] = "Avoir tous les éléments de menu avec des utilisations infinies", ['ger'] = "Haben Sie alle Menüpunkte mit unbegrenzten Verwendungsmöglichkeiten", ['spa'] = "Tener todos los elementos del menú con usos infinitos" }, { ['def'] = "&lt;select_theme_script&gt;", ['eng'] = "Choose colour theme", ['fre'] = "Choisir le thème de couleur", ['ger'] = "Wählen Sie ein Farbschema", ['spa'] = "Elegir tema de color" }, { ['def'] = "&lt;previous_theme_script&gt;", ['eng'] = "Select previous colour theme", ['fre'] = "Sélectionner le thème de couleur précédent", ['ger'] = "Vorheriges Farbschema auswählen", ['spa'] = "Seleccionar tema de color anterior" }, { ['def'] = "&lt;next_theme_script&gt;", ['eng'] = "Select next colour theme", ['fre'] = "Sélectionner le thème de couleur suivant", ['ger'] = "Nächstes Farbthema auswählen", ['spa'] = "Seleccione el siguiente tema de color" }, { ['def'] = "&lt;rgb_theme_menu&gt;", ['eng'] = "Colour theme settings", ['fre'] = "Paramètres de thème de couleur", ['ger'] = "Einstellungen für Farbthemen", ['spa'] = "Ajustes de tema de color" }, { ['def'] = "&lt;all_key_items_cheat&gt;", ['eng'] = "Have all key items", ['fre'] = "Avoir tous les éléments clés", ['ger'] = "Haben Sie alle Schlüsselelemente", ['spa'] = "Tener todos los elementos clave" }, { ['def'] = "&lt;battle_speed&gt;", ['eng'] = "Battle speed", ['fre'] = "Vitesse de bataille", ['ger'] = "Kampfgeschwindigkeit", ['spa'] = "Velocidad de batalla" }, { ['def'] = "&lt;battle_message_speed&gt;", ['eng'] = "Battle message speed", ['fre'] = "Message de bataille vitesse", ['ger'] = "Kampfnachricht Geschwindigkeit", ['spa'] = "Velocidad de mensaje de batalla" }, { ['def'] = "&lt;1_hp_cheat&gt;", ['eng'] = "Rest in peace", ['fre'] = "Repose en paix", ['ger'] = "Ruhe in Frieden", ['spa'] = "Descansa en paz" }, { ['def'] = "&lt;field_message_speed&gt;", ['eng'] = "Field message speed", ['fre'] = "Vitesse du message de terrain", ['ger'] = "Geschwindigkeit der Feldnachricht", ['spa'] = "Mensaje de campo de velocidad" }, { ['def'] = "&lt;menu_rgb&gt;", ['eng'] = "Menu RGB settings", ['fre'] = "Paramètres du menu RVB", ['ger'] = "Menü RGB-Einstellungen", ['spa'] = "Ajustes de menú RGB" }, { ['def'] = "&lt;roster_top_char&gt;", ['eng'] = "Top character", ['fre'] = "Meilleur personnage", ['ger'] = "Top Charakter", ['spa'] = "Personaje superior" }, { ['def'] = "&lt;roster_mid_char&gt;", ['eng'] = "Centre character", ['fre'] = "Personnage central", ['ger'] = "Zentraler Charakter", ['spa'] = "Personaje central" }, { ['def'] = "&lt;roster_bot_char&gt;", ['eng'] = "Bottom character", ['fre'] = "Caractère du bas", ['ger'] = "Unteres Zeichen", ['spa'] = "Carácter inferior" }, { ['def'] = "&lt;menu_options_script&gt;", ['eng'] = "Menu options availability", ['fre'] = "Disponibilité des options de menu", ['ger'] = "Menüoptionen Verfügbarkeit", ['spa'] = "Opciones de menú disponibles." }, { ['def'] = "&lt;compare_versions&gt;", ['eng'] = "Compare versions", ['fre'] = "Comparer les versions", ['ger'] = "Versionen vergleichen", ['spa'] = "Comparar versiones" }, { ['def'] = "&lt;run_all_tests&gt;", ['eng'] = "Run all tests", ['fre'] = "Exécuter tous les tests", ['ger'] = "Führen Sie alle Tests aus", ['spa'] = "Ejecutar todas las pruebas" }, { ['def'] = "&lt;all_materia_cheat&gt;", ['eng'] = "Have every materia mastered", ['fre'] = "Chaque materia maîtrisé", ['ger'] = "Habe jede Materia gemeistert", ['spa'] = "Tener cada materia dominada" }, { ['def'] = "&lt;uber_starting_gear_cheat&gt;", ['eng'] = "Maximum power starting equipment", ['fre'] = "Puissance maximale de l'équipement de démarrage", ['ger'] = "Maximale Startleistung", ['spa'] = "Equipo de arranque de potencia máxima" }, { ['def'] = "&lt;lucky_7_cheat&gt;", ['eng'] = "Lucky 7s Fever", ['fre'] = "Fièvre des 7 chanceux", ['ger'] = "Glückliches Fieber 7s", ['spa'] = "Lucky 7s Fever" }, { ['def'] = "&lt;max_hp_cheat&gt;", ['eng'] = "Maximum HP", ['fre'] = "HP maximum", ['ger'] = "Maximale HP", ['spa'] = "HP máximo" }, { ['def'] = "&lt;max_mp_cheat&gt;", ['eng'] = "Maximum MP", ['fre'] = "MP maximum", ['ger'] = "Maximale MP", ['spa'] = "MP máximo" }, { ['def'] = "&lt;fast_limit_breaks_cheat&gt;", ['eng'] = "Fast limit breaks", ['fre'] = "Limites rapides", ['ger'] = "Schnelle Limitpausen", ['spa'] = "Límites rápidos" }, { ['def'] = "&lt;full_atb_cheat&gt;", ['eng'] = "Full ATB Meter", ['fre'] = "Plein compteur ATB", ['ger'] = "Volles ATB-Messgerät", ['spa'] = "Medidor ATB completo" }, { ['def'] = "&lt;fast_encounters_world&gt;", ['eng'] = "(World) Frequent random encounters", ['fre'] = "(Monde) Rencontres aléatoires fréquentes", ['ger'] = "(Welt) Häufige zufällige Begegnungen", ['spa'] = "(Mundo) Encuentros aleatorios frecuentes" }, { ['def'] = "&lt;fast_encounters_field&gt;", ['eng'] = "(Field) Frequent random encounters", ['fre'] = "(Champ) Rencontres aléatoires fréquentes", ['ger'] = "(Feld) Häufige zufällige Begegnungen", ['spa'] = "(Campo) Encuentros aleatorios frecuentes" }, { ['def'] = "&lt;no_encounters_world&gt;", ['eng'] = "(World) Disable random encounters", ['fre'] = "(Monde) Désactiver les rencontres aléatoires", ['ger'] = "(Welt) Zufällige Begegnungen deaktivieren", ['spa'] = "(Mundo) Desactivar encuentros aleatorios" }, { ['def'] = "&lt;no_encounters_field&gt;", ['eng'] = "(Field) Disable random encounters", ['fre'] = "(Champ) Désactiver les rencontres aléatoires", ['ger'] = "(Feld) Zufällige Begegnungen deaktivieren", ['spa'] = "(Campo) Desactivar encuentros aleatorios" }, { ['def'] = "&lt;save_phs_cheat&gt;", ['eng'] = "Save / PHS anywhere", ['fre'] = "Enregistrer / PHS n'importe où", ['ger'] = "Speichern Sie / PHS überall", ['spa'] = "Guardar / PHS en cualquier lugar" }, { ['def'] = "&lt;debug_room_cheat&gt;", ['eng'] = "Enter debug room (PlayStation only)", ['fre'] = "Entrez dans la salle de débogage (PlayStation uniquement)", ['ger'] = "Debug-Raum betreten (nur PlayStation)", ['spa'] = "Entrar en la sala de depuración (solo PlayStation)" }, { ['def'] = "&lt;speed_hack_cheat&gt;", ['eng'] = "Speed hack", ['fre'] = "Hack de vitesse", ['ger'] = "Speed Hack", ['spa'] = "Truco velocidad" }, { ['def'] = "&lt;auto_config_cheat&gt;", ['eng'] = "Automatically configure menu", ['fre'] = "Configurer automatiquement le menu", ['ger'] = "Menü automatisch konfigurieren", ['spa'] = "Configurar automáticamente el menú" }, { ['def'] = "&lt;random_battle_world_map_menu&gt;", ['eng'] = "(World) Random encounter settings", ['fre'] = "(Monde) Paramètres de rencontre aléatoires", ['ger'] = "(Welt) Einstellungen für zufällige Begegnungen", ['spa'] = "(Mundo) Configuración de encuentro aleatorio" }, { ['def'] = "&lt;random_battle_field_map_menu&gt;", ['eng'] = "(Field) Random encounter settings", ['fre'] = "(Champ) Paramètres de rencontre aléatoires", ['ger'] = "(Feld) Einstellungen für zufällige Begegnungen", ['spa'] = "(Campo) Configuración de encuentro aleatorio" }, { ['def'] = "&lt;random_battle_world_map_can_occur&gt;", ['eng'] = "Can random encounters occur?", ['fre'] = "Des rencontres aléatoires peuvent-elles se produire?", ['ger'] = "Können zufällige Begegnungen auftreten?", ['spa'] = "¿Pueden ocurrir encuentros al azar?" }, { ['def'] = "&lt;random_battle_world_map_distance&gt;", ['eng'] = "Safe distance until encounters can occur", ['fre'] = "Distance de sécurité jusqu'à ce que des rencontres puissent se produire", ['ger'] = "Sicherheitsabstand, bis Begegnungen auftreten können", ['spa'] = "Distancia segura hasta que puedan ocurrir encuentros" }, { ['def'] = "&lt;random_battle_world_map_loop&gt;", ['eng'] = "Looping ticker", ['fre'] = "Ticker en boucle", ['ger'] = "Looping-Ticker", ['spa'] = "Ticker bucle" }, { ['def'] = "&lt;random_battle_world_map_counter&gt;", ['eng'] = "Total ticker loops", ['fre'] = "Nombre total de boucles", ['ger'] = "Gesamtzahl der Ticker-Loops", ['spa'] = "Total de bucles de ticker" }, { ['def'] = "&lt;rgb_array&gt;", ['eng'] = "RGB Array", ['fre'] = "Tableau RVB", ['ger'] = "RGB Array", ['spa'] = "RGB Array" }, { ['def'] = "&lt;rgb_top_left&gt;", ['eng'] = "RGB Top Left", ['fre'] = "RVB en haut à gauche", ['ger'] = "RGB arriba a la izquierda", ['spa'] = "RGB arriba a la izquierda" }, { ['def'] = "&lt;rgb_top_right&gt;", ['eng'] = "RGB Top Right", ['fre'] = "RVB en haut à droite", ['ger'] = "RGB arriba a la derecha", ['spa'] = "RGB arriba a la derecha" }, { ['def'] = "&lt;rgb_bottom_left&gt;", ['eng'] = "RGB Bottom Left", ['fre'] = "RVB en bas à gauche", ['ger'] = "RGB parte inferior izquierda", ['spa'] = "RGB parte inferior izquierda" }, { ['def'] = "&lt;rgb_bottom_right&gt;", ['eng'] = "RGB Bottom Right", ['fre'] = "RVB en bas à droite", ['ger'] = "RGB abajo a la derecha", ['spa'] = "RGB abajo a la derecha" } }
+table_names = { ['placeholders'] = { ['def]'] = "placeholder_name", ["eng"] = "Placeholder Name", ['fre'] = "Nom_d'espace_réservé", ['ger'] = "Platzhaltername", ['spa'] = "Nombre_del_marcador_de_posición", ['jap'] = "プレースホルダ名" }, { ['def'] = "&lt;accessory_stats_script&gt;", ['eng'] = "Accessory attributes", ['fre'] = "Attributs accessoires", ['ger'] = "Zusatzattribute", ['spa'] = "Atributos accesorios" }, { ['def'] = "&lt;armour_stats_script&gt;", ['eng'] = "Armour attributes", ['fre'] = "Attributs d'armure", ['ger'] = "Rüstungsattribute", ['spa'] = "Atributos de armadura" }, { ['def'] = "&lt;battle_arena_points&gt;", ['eng'] = "Battle points (while in arena)", ['fre'] = "Points de bataille (dans l'arène)", ['ger'] = "Kampfpunkte (in der Arena)", ['spa'] = "Puntos de batalla (en la arena)" }, { ['def'] = "&lt;battle_items_script&gt;", ['eng'] = "In-battle items", ['fre'] = "Articles de combat", ['ger'] = "Kampfgegenstände", ['spa'] = "Objetos de batalla" }, { ['def'] = "&lt;battle_points&gt;", ['eng'] = "Battle points", ['fre'] = "Points de bataille", ['ger'] = "Kampfpunkte", ['spa'] = "Puntos de batalla" }, { ['def'] = "&lt;battle_stats_script&gt;", ['eng'] = "In-battle stats", ['fre'] = "Statistiques de combat", ['ger'] = "Kampfstatistiken", ['spa'] = "Estadísticas de batalla" }, { ['def'] = "&lt;battles_entered&gt;", ['eng'] = "Battles fought", ['fre'] = "Batailles livrées", ['ger'] = "Schlachten kämpften", ['spa'] = "Batallas peleadas" }, { ['def'] = "&lt;battles_fled&gt;", ['eng'] = "Battles escaped", ['fre'] = "Batailles échappées", ['ger'] = "Schlachten entkamen", ['spa'] = "Batallas escapadas" }, { ['def'] = "&lt;cheats_menu&gt;", ['eng'] = "Cheats", ['fre'] = "Cheats", ['ger'] = "Betrügt", ['spa'] = "Guiones de trucos" }, { ['def'] = "&lt;chocobo_stats_script&gt;", ['eng'] = "Chocobo attributes", ['fre'] = "Attributs de chocobo", ['ger'] = "Chocobo-Attribute", ['spa'] = "Atributos de chocobo" }, { ['def'] = "&lt;config_menu_menu&gt;", ['eng'] = "Config menu", ['fre'] = "Menu de configuration", ['ger'] = "Konfigurationsmenü", ['spa'] = "Menú de configuración" }, { ['def'] = "&lt;current_roster_menu&gt;", ['eng'] = "Current roster", ['fre'] = "Liste actuelle", ['ger'] = "Aktueller Dienstplan", ['spa'] = "Lista actual" }, { ['def'] = "&lt;debug_mode_menu&gt;", ['eng'] = "Built-in debug mode", ['fre'] = "Mode de débogage intégré", ['ger'] = "Eingebauter Debug-Modus", ['spa'] = "Modo de depuración incorporado" }, { ['def'] = "&lt;displayed_stats&gt;", ['eng'] = "Displayed stats (not real)", ['fre'] = "Statistiques affichées (non réelles)", ['ger'] = "Angezeigte Statistiken (nicht real)", ['spa'] = "Estadísticas mostradas (no reales)" }, { ['def'] = "&lt;in_battle_cheats&gt;", ['eng'] = "In-battle cheats", ['fre'] = "Cheats en combat", ['ger'] = "Cheats im Kampf", ['spa'] = "Trucos en la batalla" }, { ['def'] = "&lt;inventory_cheats&gt;", ['eng'] = "Inventory cheats", ['fre'] = "Astuces d'inventaire", ['ger'] = "Inventar betrügt", ['spa'] = "Trampas de inventario" }, { ['def'] = "&lt;inventory_menu&gt;", ['eng'] = "Inventory", ['fre'] = "Inventaire", ['ger'] = "Inventar", ['spa'] = "Inventario" }, { ['def'] = "&lt;materia_script&gt;", ['eng'] = "Materia", ['fre'] = "Materia", ['ger'] = "Materia", ['spa'] = "Materia" }, { ['def'] = "&lt;menu_access&gt;", ['eng'] = "Menu options availability", ['fre'] = "Disponibilité des options de menu", ['ger'] = "Menüoptionen Verfügbarkeit", ['spa'] = "Opciones de menú disponibles" }, { ['def'] = "&lt;menu_items_script&gt;", ['eng'] = "Menu items", ['fre'] = "Articles de menu", ['ger'] = "Menüpunkte", ['spa'] = "Elementos de menú" }, { ['def'] = "&lt;misc_cheats&gt;", ['eng'] = "Miscellaneous cheats", ['fre'] = "Diverses astuces", ['ger'] = "Verschiedene Cheats", ['spa'] = "Tramposos varios" }, { ['def'] = "&lt;misc_menu&gt;", ['eng'] = "Miscellaneous", ['fre'] = "Divers", ['ger'] = "Verschiedenes", ['spa'] = "Opciones misceláneas" }, { ['def'] = "&lt;post_battle_menu&gt;", ['eng'] = "Post-battle rewards", ['fre'] = "Récompenses après la bataille", ['ger'] = "Belohnungen nach dem Kampf", ['spa'] = "Récompenses après la bataille" }, { ['def'] = "&lt;random_battle_cheats&gt;", ['eng'] = "Random encounter frequency", ['fre'] = "Fréquence de rencontre aléatoire", ['ger'] = "Zufällige Begegnungsfrequenz", ['spa'] = "Frecuencia de encuentro aleatorio" }, { ['def'] = "&lt;random_battle_menu&gt;", ['eng'] = "Random encounter settings", ['fre'] = "Paramètres de rencontre aléatoires", ['ger'] = "Einstellungen für zufällige Begegnungen", ['spa'] = "Configuración de encuentro aleatorio" }, { ['def'] = "&lt;random_battle_world_map_can_occur&gt;", ['eng'] = "Can random encounters occur?", ['fre'] = "Des rencontres aléatoires peuvent-elles se produire?", ['ger'] = "Können zufällige Begegnungen auftreten?", ['spa'] = "¿Pueden ocurrir encuentros al azar?" }, { ['def'] = "&lt;random_battle_world_map_counter&gt;", ['eng'] = "Random encounter loops counter", ['fre'] = "Compteur de boucles de rencontres aléatoires", ['ger'] = "Zähler für zufällige Begegnungsschleifen", ['spa'] = "Contador de bucles de encuentro aleatorio" }, { ['def'] = "&lt;random_battle_world_map_distance&gt;", ['eng'] = "Distance until encounters can occur", ['fre'] = "Distance jusqu'à la rencontre peut se produire", ['ger'] = "Entfernung, bis Begegnungen auftreten können", ['spa'] = "Distancia hasta que puedan ocurrir encuentros." }, { ['def'] = "&lt;random_battle_world_map_loop&gt;", ['eng'] = "Random encounter looping ticker", ['fre'] = "Rencontre aléatoire boucle ticker", ['ger'] = "Zufälliger Loop-Ticker für Begegnungen", ['spa'] = "Ticker de bucle encuentro aleatorio" }, { ['def'] = "&lt;random_battle_field_map_loop&gt;", ['eng'] = "Random encounter looping ticker", ['fre'] = "Rencontre aléatoire boucle ticker", ['ger'] = "Zufälliger Loop-Ticker für Begegnungen", ['spa'] = "Ticker de bucle encuentro aleatorio" }, { ['def'] = "&lt;real_stats_by_char&gt;", ['eng'] = "Real stats (sorted by character)", ['fre'] = "Statistiques réelles (triées par caractère)", ['ger'] = "Echte Statistiken (sortiert nach Charakter)", ['spa'] = "Estadísticas reales (ordenadas por personaje)" }, { ['def'] = "&lt;real_stats_by_stat&gt;", ['eng'] = "Real stats (sorted by stat)", ['fre'] = "Statistiques réelles (triées par statistiques)", ['ger'] = "Echte Statistiken (sortiert nach Statistik)", ['spa'] = "Estadísticas reales (ordenadas por estadística)" }, { ['def'] = "&lt;save_phs&gt;", ['eng'] = "Save &amp; PHS availability", ['fre'] = "Enregistrer et disponibilité PHS", ['ger'] = "Sparen Sie &amp; PHS Verfügbarkeit", ['spa'] = "Guardar y disponibilidad de PHS" }, { ['def'] = "&lt;set_debug_level&gt;", ['eng'] = "Set debugging level", ['fre'] = "Définir le niveau de débogage", ['ger'] = "Festlegen der Debugstufe", ['spa'] = "Establecer nivel de depuración" }, { ['def'] = "&lt;stats_menu&gt;", ['eng'] = "Statistics", ['fre'] = "Statistiques", ['ger'] = "Statistiken", ['spa'] = "Estadística" }, { ['def'] = "&lt;templates_menu&gt;", ['eng'] = "Templates menu (DO NOT RENAME OR DELETE)", ['fre'] = "Menu Modèles (NE PAS RENOMMER OU SUPPRIMER)", ['ger'] = "Vorlagen-Menü (NICHT UMBENENNEN ODER LÖSCHEN)", ['spa'] = "Menú de plantillas (NO RENOMAR NI BORRAR)" }, { ['def'] = "&lt;testing_menu&gt;", ['eng'] = "For testing", ['fre'] = "Pour tester", ['ger'] = "Zum Prüfen", ['spa'] = "Para las pruebas" }, { ['def'] = "&lt;timers_menu&gt;", ['eng'] = "Timers", ['fre'] = "Minuteries", ['ger'] = "Timer", ['spa'] = "Temporizadores" }, { ['def'] = "&lt;total_time_played&gt;", ['eng'] = "Total time played (in seconds)", ['fre'] = "Temps total joué (en secondes)", ['ger'] = "Gesamtspielzeit (in Sekunden)", ['spa'] = "Tiempo total jugado (en segundos)" }, { ['def'] = "&lt;other_timers&gt;", ['eng'] = "Other timers (in seconds)", ['fre'] = "Autres minuteries (en secondes)", ['ger'] = "Andere Timer (in Sekunden)", ['spa'] = "Otros temporizadores (en segundos)" }, { ['def'] = "&lt;weapon_stats_script&gt;", ['eng'] = "Weapon attributes", ['fre'] = "Attributs d'arme", ['ger'] = "Waffenattribute", ['spa'] = "Atributos del arma" }, { ['def'] = "&lt;debug_mode_1&gt;", ['eng'] = "Current screen", ['fre'] = "Écran actuel", ['ger'] = "Aktueller Bildschirm", ['spa'] = "Pantalla actual" }, { ['def'] = "&lt;debug_mode_2&gt;", ['eng'] = "Debug mode 2", ['fre'] = "Mode débogage 2", ['ger'] = "Debug-Modus 2", ['spa'] = "Modo de depuración 2" }, { ['def'] = "&lt;infinite_items_cheat&gt;", ['eng'] = "Have all menu items with infinite uses", ['fre'] = "Avoir tous les éléments de menu avec des utilisations infinies", ['ger'] = "Haben Sie alle Menüpunkte mit unbegrenzten Verwendungsmöglichkeiten", ['spa'] = "Tener todos los elementos del menú con usos infinitos" }, { ['def'] = "&lt;select_theme_script&gt;", ['eng'] = "Choose colour theme", ['fre'] = "Choisir le thème de couleur", ['ger'] = "Wählen Sie ein Farbschema", ['spa'] = "Elegir tema de color" }, { ['def'] = "&lt;previous_theme_script&gt;", ['eng'] = "Select previous colour theme", ['fre'] = "Sélectionner le thème de couleur précédent", ['ger'] = "Vorheriges Farbschema auswählen", ['spa'] = "Seleccionar tema de color anterior" }, { ['def'] = "&lt;next_theme_script&gt;", ['eng'] = "Select next colour theme", ['fre'] = "Sélectionner le thème de couleur suivant", ['ger'] = "Nächstes Farbthema auswählen", ['spa'] = "Seleccione el siguiente tema de color" }, { ['def'] = "&lt;rgb_theme_menu&gt;", ['eng'] = "Colour theme settings", ['fre'] = "Paramètres de thème de couleur", ['ger'] = "Einstellungen für Farbthemen", ['spa'] = "Ajustes de tema de color" }, { ['def'] = "&lt;all_key_items_cheat&gt;", ['eng'] = "Have all key items", ['fre'] = "Avoir tous les éléments clés", ['ger'] = "Haben Sie alle Schlüsselelemente", ['spa'] = "Tener todos los elementos clave" }, { ['def'] = "&lt;battle_speed&gt;", ['eng'] = "Battle speed", ['fre'] = "Vitesse de bataille", ['ger'] = "Kampfgeschwindigkeit", ['spa'] = "Velocidad de batalla" }, { ['def'] = "&lt;battle_message_speed&gt;", ['eng'] = "Battle message speed", ['fre'] = "Message de bataille vitesse", ['ger'] = "Kampfnachricht Geschwindigkeit", ['spa'] = "Velocidad de mensaje de batalla" }, { ['def'] = "&lt;1_hp_cheat&gt;", ['eng'] = "Rest in peace", ['fre'] = "Repose en paix", ['ger'] = "Ruhe in Frieden", ['spa'] = "Descansa en paz" }, { ['def'] = "&lt;field_message_speed&gt;", ['eng'] = "Field message speed", ['fre'] = "Vitesse du message de terrain", ['ger'] = "Geschwindigkeit der Feldnachricht", ['spa'] = "Mensaje de campo de velocidad" }, { ['def'] = "&lt;menu_rgb&gt;", ['eng'] = "Menu RGB settings", ['fre'] = "Paramètres du menu RVB", ['ger'] = "Menü RGB-Einstellungen", ['spa'] = "Ajustes de menú RGB" }, { ['def'] = "&lt;roster_top_char&gt;", ['eng'] = "Top character", ['fre'] = "Meilleur personnage", ['ger'] = "Top Charakter", ['spa'] = "Personaje superior" }, { ['def'] = "&lt;roster_mid_char&gt;", ['eng'] = "Centre character", ['fre'] = "Personnage central", ['ger'] = "Zentraler Charakter", ['spa'] = "Personaje central" }, { ['def'] = "&lt;roster_bot_char&gt;", ['eng'] = "Bottom character", ['fre'] = "Caractère du bas", ['ger'] = "Unteres Zeichen", ['spa'] = "Carácter inferior" }, { ['def'] = "&lt;menu_options_script&gt;", ['eng'] = "Menu options availability", ['fre'] = "Disponibilité des options de menu", ['ger'] = "Menüoptionen Verfügbarkeit", ['spa'] = "Opciones de menú disponibles." }, { ['def'] = "&lt;compare_versions&gt;", ['eng'] = "Compare versions", ['fre'] = "Comparer les versions", ['ger'] = "Versionen vergleichen", ['spa'] = "Comparar versiones" }, { ['def'] = "&lt;run_all_tests&gt;", ['eng'] = "Run all tests", ['fre'] = "Exécuter tous les tests", ['ger'] = "Führen Sie alle Tests aus", ['spa'] = "Ejecutar todas las pruebas" }, { ['def'] = "&lt;all_materia_cheat&gt;", ['eng'] = "Have every materia mastered", ['fre'] = "Chaque materia maîtrisé", ['ger'] = "Habe jede Materia gemeistert", ['spa'] = "Tener cada materia dominada" }, { ['def'] = "&lt;uber_starting_gear_cheat&gt;", ['eng'] = "Maximum power starting equipment", ['fre'] = "Puissance maximale de l'équipement de démarrage", ['ger'] = "Maximale Startleistung", ['spa'] = "Equipo de arranque de potencia máxima" }, { ['def'] = "&lt;lucky_7_cheat&gt;", ['eng'] = "Lucky 7s Fever", ['fre'] = "Fièvre des 7 chanceux", ['ger'] = "Glückliches Fieber 7s", ['spa'] = "Lucky 7s Fever" }, { ['def'] = "&lt;max_hp_cheat&gt;", ['eng'] = "Maximum HP", ['fre'] = "HP maximum", ['ger'] = "Maximale HP", ['spa'] = "HP máximo" }, { ['def'] = "&lt;max_mp_cheat&gt;", ['eng'] = "Maximum MP", ['fre'] = "MP maximum", ['ger'] = "Maximale MP", ['spa'] = "MP máximo" }, { ['def'] = "&lt;fast_limit_breaks_cheat&gt;", ['eng'] = "Fast limit breaks", ['fre'] = "Limites rapides", ['ger'] = "Schnelle Limitpausen", ['spa'] = "Límites rápidos" }, { ['def'] = "&lt;full_atb_cheat&gt;", ['eng'] = "Full ATB Meter", ['fre'] = "Plein compteur ATB", ['ger'] = "Volles ATB-Messgerät", ['spa'] = "Medidor ATB completo" }, { ['def'] = "&lt;fast_encounters_world&gt;", ['eng'] = "(World) Frequent random encounters", ['fre'] = "(Monde) Rencontres aléatoires fréquentes", ['ger'] = "(Welt) Häufige zufällige Begegnungen", ['spa'] = "(Mundo) Encuentros aleatorios frecuentes" }, { ['def'] = "&lt;fast_encounters_field&gt;", ['eng'] = "(Field) Frequent random encounters", ['fre'] = "(Champ) Rencontres aléatoires fréquentes", ['ger'] = "(Feld) Häufige zufällige Begegnungen", ['spa'] = "(Campo) Encuentros aleatorios frecuentes" }, { ['def'] = "&lt;no_encounters_world&gt;", ['eng'] = "(World) Disable random encounters", ['fre'] = "(Monde) Désactiver les rencontres aléatoires", ['ger'] = "(Welt) Zufällige Begegnungen deaktivieren", ['spa'] = "(Mundo) Desactivar encuentros aleatorios" }, { ['def'] = "&lt;no_encounters_field&gt;", ['eng'] = "(Field) Disable random encounters", ['fre'] = "(Champ) Désactiver les rencontres aléatoires", ['ger'] = "(Feld) Zufällige Begegnungen deaktivieren", ['spa'] = "(Campo) Desactivar encuentros aleatorios" }, { ['def'] = "&lt;save_phs_cheat&gt;", ['eng'] = "Save / PHS anywhere", ['fre'] = "Enregistrer / PHS n'importe où", ['ger'] = "Speichern Sie / PHS überall", ['spa'] = "Guardar / PHS en cualquier lugar" }, { ['def'] = "&lt;debug_room_cheat&gt;", ['eng'] = "Enter debug room (PlayStation only)", ['fre'] = "Entrez dans la salle de débogage (PlayStation uniquement)", ['ger'] = "Debug-Raum betreten (nur PlayStation)", ['spa'] = "Entrar en la sala de depuración (solo PlayStation)" }, { ['def'] = "&lt;speed_hack_cheat&gt;", ['eng'] = "Speed hack", ['fre'] = "Hack de vitesse", ['ger'] = "Speed Hack", ['spa'] = "Truco velocidad" }, { ['def'] = "&lt;auto_config_cheat&gt;", ['eng'] = "Automatically configure menu", ['fre'] = "Configurer automatiquement le menu", ['ger'] = "Menü automatisch konfigurieren", ['spa'] = "Configurar automáticamente el menú" }, { ['def'] = "&lt;random_battle_world_map_menu&gt;", ['eng'] = "(World) Random encounter settings", ['fre'] = "(Monde) Paramètres de rencontre aléatoires", ['ger'] = "(Welt) Einstellungen für zufällige Begegnungen", ['spa'] = "(Mundo) Configuración de encuentro aleatorio" }, { ['def'] = "&lt;random_battle_field_map_menu&gt;", ['eng'] = "(Field) Random encounter settings", ['fre'] = "(Champ) Paramètres de rencontre aléatoires", ['ger'] = "(Feld) Einstellungen für zufällige Begegnungen", ['spa'] = "(Campo) Configuración de encuentro aleatorio" }, { ['def'] = "&lt;random_battle_world_map_can_occur&gt;", ['eng'] = "Can random encounters occur?", ['fre'] = "Des rencontres aléatoires peuvent-elles se produire?", ['ger'] = "Können zufällige Begegnungen auftreten?", ['spa'] = "¿Pueden ocurrir encuentros al azar?" }, { ['def'] = "&lt;random_battle_world_map_distance&gt;", ['eng'] = "Safe distance until encounters can occur", ['fre'] = "Distance de sécurité jusqu'à ce que des rencontres puissent se produire", ['ger'] = "Sicherheitsabstand, bis Begegnungen auftreten können", ['spa'] = "Distancia segura hasta que puedan ocurrir encuentros" }, { ['def'] = "&lt;random_battle_world_map_loop&gt;", ['eng'] = "Looping ticker", ['fre'] = "Ticker en boucle", ['ger'] = "Looping-Ticker", ['spa'] = "Ticker bucle" }, { ['def'] = "&lt;random_battle_world_map_counter&gt;", ['eng'] = "Total ticker loops", ['fre'] = "Nombre total de boucles", ['ger'] = "Gesamtzahl der Ticker-Loops", ['spa'] = "Total de bucles de ticker" }, { ['def'] = "&lt;rgb_array&gt;", ['eng'] = "RGB Array", ['fre'] = "Tableau RVB", ['ger'] = "RGB Array", ['spa'] = "RGB Array" }, { ['def'] = "&lt;rgb_top_left&gt;", ['eng'] = "RGB Top Left", ['fre'] = "RVB en haut à gauche", ['ger'] = "RGB arriba a la izquierda", ['spa'] = "RGB arriba a la izquierda" }, { ['def'] = "&lt;rgb_top_right&gt;", ['eng'] = "RGB Top Right", ['fre'] = "RVB en haut à droite", ['ger'] = "RGB arriba a la derecha", ['spa'] = "RGB arriba a la derecha" }, { ['def'] = "&lt;rgb_bottom_left&gt;", ['eng'] = "RGB Bottom Left", ['fre'] = "RVB en bas à gauche", ['ger'] = "RGB parte inferior izquierda", ['spa'] = "RGB parte inferior izquierda" }, { ['def'] = "&lt;rgb_bottom_right&gt;", ['eng'] = "RGB Bottom Right", ['fre'] = "RVB en bas à droite", ['ger'] = "RGB abajo a la derecha", ['spa'] = "RGB abajo a la derecha" } }
 tr = {}
 tr.absorb = { ['def'] = "absorb", ['eng'] = "Absorb", ['fre'] = "Absorber", ['spa'] = "Absorber", ['ger'] = "Absorbieren" }
 tr.accel = { ['def'] = "accel", ['eng'] = "Acceleration", ['fre'] = "Accélération", ['spa'] = "Aceleración", ['ger'] = "Beschleunigung" }
@@ -2247,7 +2256,7 @@ local H;
 if type(eD[3]) == "table" and eD[3][eC] then H = eD[3][eC] else
 local eE = {}
 for a2 = 1, #eD[3] do if type(eD[3][a2]) == "table" then table.insert(eE, eD[3][a2][eC]) else table.insert(eE,
-eD[3][a2]) end end ;
+  eD[3][a2]) end end ;
 H = table.flatten(eE)
 end ;
 debugPrint(5,
@@ -2468,14 +2477,6 @@ ff7_es.menu_rgb = 0x596D80;
 guess_steam_values(ff7_es)
 steam_versions = { { "FF7_EN", "Final Fantasy VII for Steam (English)", ff7_steam_ENGLISH_v_1_0_9, "eng" }, { "FF7_FR", "Final Fantasy VII pour Steam (Français)", ff7_steam_FRENCH_v_1_0_9, "fre" }, { "FF7_ES", "Final Fantasy VII para Steam (Español)", ff7_steam_SPANISH_v_1_0_9, "spa" }, { "FF7_DE", "Final Fantasy VII für Steam (Deutsche)", ff7_steam_GERMAN_v_1_0_9, "ger" } }
 playstation_versions = { { "Final Fantasy VII for PlayStation (NTSC-U USA)", { "SCUS_94163", "SCUS_94164", "SCUS_94165" }, FF7_PSX_NTSC_US, "eng" }, { "Final Fantasy VII International for PlayStation (NTSC-J Japan)", { "SLPS_01057", "SLPS_01058", "SLPS_01059", "SLPS_01060" }, FF7_PSX_NTSC_JP_International, "eng" }, { "Final Fantasy VII for PlayStation (PAL Europe)", { "SCES_00867", "SCES_10867", "SCES_20867" }, FF7_PSX_PAL_UK, "eng" } }
-dp = debugPrint;
-tbs = to_byte_string;
-lcm = lazy_child_maker;
-lcd = lazy_child_deleter;
-lwt = lazy_write_timer;
-hx = to_hex_string;
-nb = number_bases;
-ps = string.pstring;
 
 debug_ = 0
 set_base_mem()
@@ -2490,7 +2491,7 @@ load_translations()
 {$lua}
 
 unload_translations()
-memrec.description = "Activate / Activar / Activer / Aktivieren"
+memrec.description = "Activate / Activar / Activer / Aktivieren / 有効にする"
 child_deactivator(memrec, true)
 
 {$asm}
@@ -3117,13 +3118,15 @@ delayed_deactivate(memrec)
               <CheatEntries>
                 <CheatEntry>
                   <ID>5653</ID>
-                  <Description>"Total play time"</Description>
+                  <Description>"&lt;total_time_played&gt;"</Description>
+                  <LastState Value="56276" RealAddress="1AA96F84"/>
                   <VariableType>4 Bytes</VariableType>
                   <Address>base_mem + cfg.total_play_time</Address>
                 </CheatEntry>
                 <CheatEntry>
                   <ID>6162</ID>
-                  <Description>"Assorted timers"</Description>
+                  <Description>"&lt;other_timers&gt;"</Description>
+                  <LastState Value="9258" RealAddress="1AA96F88"/>
                   <VariableType>2 Bytes</VariableType>
                   <Address>base_mem + cfg.total_play_time + 0x4</Address>
                 </CheatEntry>
@@ -3553,18 +3556,21 @@ lcd(memrec, true)
                 <CheatEntry>
                   <ID>5428</ID>
                   <Description>"Gil"</Description>
+                  <LastState Value="0" RealAddress="1AA97500"/>
                   <VariableType>2 Bytes</VariableType>
                   <Address>base_mem + cfg.post_battle + 8</Address>
                 </CheatEntry>
                 <CheatEntry>
                   <ID>4984</ID>
                   <Description>"EXP"</Description>
+                  <LastState Value="0" RealAddress="1AA974F8"/>
                   <VariableType>2 Bytes</VariableType>
                   <Address>base_mem + cfg.post_battle</Address>
                 </CheatEntry>
                 <CheatEntry>
                   <ID>4985</ID>
                   <Description>"AP"</Description>
+                  <LastState Value="0" RealAddress="1AA974FC"/>
                   <VariableType>2 Bytes</VariableType>
                   <Address>base_mem + cfg.post_battle + 4</Address>
                 </CheatEntry>
@@ -3575,6 +3581,7 @@ lcd(memrec, true)
               <Description>"&lt;battles_entered&gt;"</Description>
               <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">65535:Everything
 </DropDownList>
+              <LastState Value="0" RealAddress="1AA96FC0"/>
               <VariableType>2 Bytes</VariableType>
               <Address>base_mem + cfg.save_phs - 6</Address>
             </CheatEntry>
@@ -3583,6 +3590,7 @@ lcd(memrec, true)
               <Description>"&lt;battles_fled&gt;"</Description>
               <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">65535:Everything
 </DropDownList>
+              <LastState Value="0" RealAddress="1AA96FC2"/>
               <VariableType>2 Bytes</VariableType>
               <Address>base_mem + cfg.save_phs - 4</Address>
             </CheatEntry>
@@ -3598,24 +3606,28 @@ lcd(memrec, true)
             <CheatEntry>
               <ID>4986</ID>
               <Description>"Gil"</Description>
+              <LastState Value="240" RealAddress="1AA96F80"/>
               <VariableType>4 Bytes</VariableType>
               <Address>base_mem + cfg.gil</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>6222</ID>
               <Description>"GP"</Description>
+              <LastState Value="0" RealAddress="1AA970F2"/>
               <VariableType>4 Bytes</VariableType>
               <Address>base_mem + cfg.gil + 0x172</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>6401</ID>
               <Description>"&lt;battle_points&gt;"</Description>
+              <LastState Value="0" RealAddress="1AA970F8"/>
               <VariableType>2 Bytes</VariableType>
               <Address>base_mem + cfg.gil + 0x178</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>6399</ID>
               <Description>"&lt;battle_arena_points&gt;"</Description>
+              <LastState Value="0" RealAddress="1AA97018"/>
               <VariableType>4 Bytes</VariableType>
               <Address>base_mem + cfg.gil + 0x98</Address>
             </CheatEntry>
@@ -3806,6 +3818,7 @@ delayed_deactivate(memrec)
                   <Description>"weapon_stat_bonus_template"</Description>
                   <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">255:None
 </DropDownList>
+                  <LastState Value="255" RealAddress="1AA6D5D9"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + 0x738B9</Address>
                 </CheatEntry>
@@ -3815,6 +3828,7 @@ delayed_deactivate(memrec)
                   <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">3:Long Range
 35:Close Range
 </DropDownList>
+                  <LastState Value="35" RealAddress="1AA6D5C0"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + 0x738A0</Address>
                 </CheatEntry>
@@ -3850,6 +3864,7 @@ delayed_deactivate(memrec)
 25:Paralyzed
 26:Darkness
 </DropDownList>
+                  <LastState Value="255" RealAddress="1AA6D5C5"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + cfg.weapon_stats_base + 0x5</Address>
                 </CheatEntry>
@@ -4155,7 +4170,7 @@ delayed_deactivate(memrec)
 318:Sneak Glove
 319:HypnoCrown
 </DropDownList>
-                  <LastState Value="" RealAddress="00000000"/>
+                  <LastState Value="" RealAddress="1AA96900"/>
                   <VariableType>Custom</VariableType>
                   <CustomType>Menu Item ID</CustomType>
                   <Address>base_mem + 0x9CBE0</Address>
@@ -4169,6 +4184,7 @@ delayed_deactivate(memrec)
 0706:[ · ]==[ · ]
 0302:[O]==[O]
 </DropDownList>
+                  <LastState Value="0706" RealAddress="1AA6D5DC"/>
                   <ShowAsHex>1</ShowAsHex>
                   <VariableType>2 Bytes</VariableType>
                   <Address>base_mem + 0x738BC</Address>
@@ -4261,6 +4277,7 @@ delayed_deactivate(memrec)
 89:Knights of Round
 90:Master Summon
 </DropDownList>
+                  <LastState Value="255" RealAddress="1AA96B80"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + 0x9CE60</Address>
                 </CheatEntry>
@@ -4272,6 +4289,7 @@ delayed_deactivate(memrec)
 2:Double
 3:Triple
 </DropDownList>
+                  <LastState Value="1" RealAddress="1AA6D5C6"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + 0x738A6</Address>
                 </CheatEntry>
@@ -4280,6 +4298,7 @@ delayed_deactivate(memrec)
                   <Description>"materia_exp_template"</Description>
                   <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">16777215:Master
 </DropDownList>
+                  <LastState Value="16777215" RealAddress="1AA96B81"/>
                   <VariableType>Custom</VariableType>
                   <CustomType>3 Bytes</CustomType>
                   <Address>base_mem + 0x9CE60 + 1</Address>
@@ -4416,6 +4435,7 @@ delayed_deactivate(memrec)
 126:Death Penalty
 127:Masamune
 </DropDownList>
+                  <LastState Value="0" RealAddress="1AA96474"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + 0x9C754</Address>
                 </CheatEntry>
@@ -4455,6 +4475,7 @@ delayed_deactivate(memrec)
 30:Precious Watch
 31:Chocobracelet
 </DropDownList>
+                  <LastState Value="0" RealAddress="1AA96475"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + 0x9C755</Address>
                 </CheatEntry>
@@ -4495,6 +4516,7 @@ delayed_deactivate(memrec)
 30:Sneak Glove
 31:HypnoCrown
 </DropDownList>
+                  <LastState Value="255" RealAddress="1AA96476"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + 0x9C756</Address>
                 </CheatEntry>
@@ -4512,6 +4534,7 @@ delayed_deactivate(memrec)
 64:Cait Sith
 128:Vincent
 </DropDownList>
+                  <LastState Value="1" RealAddress="1AA6D5CE"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + 0x738AE</Address>
                 </CheatEntry>
@@ -4521,6 +4544,7 @@ delayed_deactivate(memrec)
                   <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Male
 1:Female
 </DropDownList>
+                  <LastState Value="0" RealAddress="1AA971D6"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + 0x9D4B6</Address>
                 </CheatEntry>
@@ -4533,6 +4557,7 @@ delayed_deactivate(memrec)
 3:Black
 4:Gold
 </DropDownList>
+                  <LastState Value="0" RealAddress="1AA971D7"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + 0x9D4B7</Address>
                 </CheatEntry>
@@ -4550,6 +4575,7 @@ delayed_deactivate(memrec)
 8:A
 9:S
 </DropDownList>
+                  <LastState Value="0" RealAddress="1AA971D5"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + 0x9D4B5</Address>
                 </CheatEntry>
@@ -4568,6 +4594,7 @@ delayed_deactivate(memrec)
 8:Cid
 10:Sephiroth
 </DropDownList>
+                  <LastState Value="1" RealAddress="1AA968FC"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + 0x9CBDC</Address>
                 </CheatEntry>
@@ -4582,6 +4609,7 @@ delayed_deactivate(memrec)
 4:Dexterity
 5:Luck
 </DropDownList>
+                  <LastState Value="255" RealAddress="1AA6D5D9"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + 0x738B9</Address>
                 </CheatEntry>
@@ -4590,6 +4618,7 @@ delayed_deactivate(memrec)
                   <Description>"debug_flag_template"</Description>
                   <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">65:Debug enabled
 </DropDownList>
+                  <LastState Value="0" RealAddress="1AA94916"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + cfg.current_screen + 0xB9A</Address>
                 </CheatEntry>
@@ -4598,6 +4627,7 @@ delayed_deactivate(memrec)
                   <Description>"current_screen_template"</Description>
                   <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">65:Debug Room
 </DropDownList>
+                  <LastState Value="0" RealAddress="1AA93D7C"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + cfg.current_screen</Address>
                 </CheatEntry>
@@ -4608,6 +4638,7 @@ delayed_deactivate(memrec)
 16:Sadness
 32:Fury
 </DropDownList>
+                  <LastState Value="0" RealAddress="1AA96477"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + cfg.real_stats_base + 0x1D</Address>
                 </CheatEntry>
@@ -4619,6 +4650,7 @@ delayed_deactivate(memrec)
 1:Invalid
 2:Halve
 </DropDownList>
+                  <LastState Value="255" RealAddress="1AA6B948"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + cfg.accessory_stats_base + 4</Address>
                 </CheatEntry>
@@ -4632,6 +4664,7 @@ delayed_deactivate(memrec)
 3:Reflect
 6:Barrier
 </DropDownList>
+                  <LastState Value="255" RealAddress="1AA6B949"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + cfg.accessory_stats_base + 5</Address>
                 </CheatEntry>
@@ -4641,6 +4674,7 @@ delayed_deactivate(memrec)
                   <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Unprotected
 1:Protected
 </DropDownList>
+                  <LastState Value="1" RealAddress="1AA6B94A"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>0</BitStart>
                   <BitLength>1</BitLength>
@@ -4653,6 +4687,7 @@ delayed_deactivate(memrec)
                   <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Unavailable
 1:Available
 </DropDownList>
+                  <LastState Value="0" RealAddress="1AA96FC4"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>0</BitStart>
                   <BitLength>1</BitLength>
@@ -4665,6 +4700,7 @@ delayed_deactivate(memrec)
                   <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Unavailable
 1:Available
 </DropDownList>
+                  <LastState Value="0" RealAddress="1AA96FC4"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>0</BitStart>
                   <BitLength>1</BitLength>
@@ -4693,12 +4729,14 @@ delayed_deactivate(memrec)
                       <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:On
 0:Off
 </DropDownList>
+                      <LastState Value="19" RealAddress="1AB0FFA0"/>
                       <VariableType>Byte</VariableType>
                       <Address>base_mem + cfg.random_battles_world_enabled</Address>
                     </CheatEntry>
                     <CheatEntry>
                       <ID>5026</ID>
                       <Description>"&lt;random_battle_world_map_distance&gt;"</Description>
+                      <LastState Value="DCDD0011" RealAddress="1AB0FF9C"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>4 Bytes</VariableType>
                       <Address>base_mem + cfg.random_battles_world_safe_distance</Address>
@@ -4706,12 +4744,14 @@ delayed_deactivate(memrec)
                     <CheatEntry>
                       <ID>7073</ID>
                       <Description>"&lt;random_battle_world_map_loop&gt;"</Description>
+                      <LastState Value="35" RealAddress="1AB0FFA4"/>
                       <VariableType>Byte</VariableType>
                       <Address>base_mem + cfg.random_battles_world_loop_tick</Address>
                     </CheatEntry>
                     <CheatEntry>
                       <ID>7074</ID>
                       <Description>"&lt;random_battle_world_map_counter&gt;"</Description>
+                      <LastState Value="34" RealAddress="1AB0FFA5"/>
                       <VariableType>Byte</VariableType>
                       <Address>base_mem + cfg.random_battles_world_loop_count</Address>
                     </CheatEntry>
@@ -4727,6 +4767,7 @@ delayed_deactivate(memrec)
                     <CheatEntry>
                       <ID>5025</ID>
                       <Description>"&lt;random_battle_field_map_loop&gt;"</Description>
+                      <LastState Value="0" RealAddress="1AA6B45C"/>
                       <VariableType>2 Bytes</VariableType>
                       <Address>base_mem + cfg.random_battles_field</Address>
                     </CheatEntry>
@@ -4770,6 +4811,7 @@ lcd(memrec, true)
 0200:PHS only
 0300:Disabled
 </DropDownList>
+              <LastState Value="0000" RealAddress="1AA96FC6"/>
               <ShowAsHex>1</ShowAsHex>
               <VariableType>2 Bytes</VariableType>
               <Address>base_mem + cfg.save_phs</Address>
@@ -4785,6 +4827,7 @@ lcd(memrec, true)
                   <ID>7231</ID>
                   <Description>"&lt;debug_mode_1&gt;"</Description>
                   <DropDownListLink>current_screen_template</DropDownListLink>
+                  <LastState Value="0" RealAddress="1AA93D7C"/>
                   <VariableType>2 Bytes</VariableType>
                   <Address>base_mem + cfg.current_screen</Address>
                 </CheatEntry>
@@ -4792,6 +4835,7 @@ lcd(memrec, true)
                   <ID>7232</ID>
                   <Description>"&lt;debug_mode_2&gt;"</Description>
                   <DropDownListLink>debug_flag_template</DropDownListLink>
+                  <LastState Value="0" RealAddress="1AA94916"/>
                   <VariableType>2 Bytes</VariableType>
                   <Address>base_mem + cfg.debug_mode_2</Address>
                 </CheatEntry>
@@ -4814,6 +4858,7 @@ lcd(memrec, true)
                     <CheatEntry>
                       <ID>7486</ID>
                       <Description>"&lt;rgb_array&gt;"</Description>
+                      <LastState Value="0 88 176 0 0 128 0 0 80 0 0 32 88 2 0 0" RealAddress="1AA42F28"/>
                       <VariableType>Array of byte</VariableType>
                       <ByteLength>16</ByteLength>
                       <Address>base_mem + cfg.menu_rgb</Address>
@@ -4821,6 +4866,7 @@ lcd(memrec, true)
                     <CheatEntry>
                       <ID>7063</ID>
                       <Description>"&lt;rgb_top_left&gt;"</Description>
+                      <LastState Value="0 88 176" RealAddress="1AA42F28"/>
                       <VariableType>Array of byte</VariableType>
                       <ByteLength>3</ByteLength>
                       <Address>base_mem + cfg.menu_rgb</Address>
@@ -4828,6 +4874,7 @@ lcd(memrec, true)
                     <CheatEntry>
                       <ID>6412</ID>
                       <Description>"&lt;rgb_top_right&gt;"</Description>
+                      <LastState Value="0 0 128" RealAddress="1AA42F2B"/>
                       <VariableType>Array of byte</VariableType>
                       <ByteLength>3</ByteLength>
                       <Address>base_mem + cfg.menu_rgb + cfg.menu_rgb_offset</Address>
@@ -4835,6 +4882,7 @@ lcd(memrec, true)
                     <CheatEntry>
                       <ID>6413</ID>
                       <Description>"&lt;rgb_bottom_left&gt;"</Description>
+                      <LastState Value="0 0 80" RealAddress="1AA42F2E"/>
                       <VariableType>Array of byte</VariableType>
                       <ByteLength>3</ByteLength>
                       <Address>base_mem + cfg.menu_rgb + (cfg.menu_rgb_offset * 2)</Address>
@@ -4842,6 +4890,7 @@ lcd(memrec, true)
                     <CheatEntry>
                       <ID>6414</ID>
                       <Description>"&lt;rgb_bottom_right&gt;"</Description>
+                      <LastState Value="0 0 32" RealAddress="1AA42F31"/>
                       <VariableType>Array of byte</VariableType>
                       <ByteLength>3</ByteLength>
                       <Address>base_mem + cfg.menu_rgb + (cfg.menu_rgb_offset * 3)</Address>
@@ -4851,18 +4900,21 @@ lcd(memrec, true)
                 <CheatEntry>
                   <ID>6402</ID>
                   <Description>"&lt;battle_speed&gt;"</Description>
+                  <LastState Value="0" RealAddress="1AA974DC"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + cfg.config_menu_settings</Address>
                 </CheatEntry>
                 <CheatEntry>
                   <ID>7061</ID>
                   <Description>"&lt;battle_message_speed&gt;"</Description>
+                  <LastState Value="0" RealAddress="1AA974DD"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + cfg.config_menu_settings + 1</Address>
                 </CheatEntry>
                 <CheatEntry>
                   <ID>7062</ID>
                   <Description>"&lt;field_message_speed&gt;"</Description>
+                  <LastState Value="0" RealAddress="1AA974F0"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + cfg.config_menu_settings + 0x14</Address>
                 </CheatEntry>
@@ -4879,6 +4931,7 @@ lcd(memrec, true)
                   <ID>6906</ID>
                   <Description>"&lt;roster_top_char&gt;"</Description>
                   <DropDownListLink>character_id_template</DropDownListLink>
+                  <LastState Value="1" RealAddress="1AA968FC"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + cfg.current_roster</Address>
                 </CheatEntry>
@@ -4886,6 +4939,7 @@ lcd(memrec, true)
                   <ID>6908</ID>
                   <Description>"&lt;roster_mid_char&gt;"</Description>
                   <DropDownListLink>character_id_template</DropDownListLink>
+                  <LastState Value="2" RealAddress="1AA968FD"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + cfg.current_roster + 1</Address>
                 </CheatEntry>
@@ -4893,6 +4947,7 @@ lcd(memrec, true)
                   <ID>6907</ID>
                   <Description>"&lt;roster_bot_char&gt;"</Description>
                   <DropDownListLink>character_id_template</DropDownListLink>
+                  <LastState Value="0" RealAddress="1AA968FE"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + cfg.current_roster + 2</Address>
                 </CheatEntry>
