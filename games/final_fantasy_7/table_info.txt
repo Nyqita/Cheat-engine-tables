@@ -11,7 +11,7 @@ Current table version
 Changelog
 	Version 1.1
 		Minor bug fixes
-			Problem with cheat table not initialising the first time you try to activate it
+			Cheat table initialisation script not activating the first time you try to enable it, but activating all subsequent times
 	Version 1.0
 		Most aspects of the cheat table support English, French, Spanish, and German
 			Note: Most text was translated using Google Translate - https://translate.google.co.uk/
