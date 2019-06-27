@@ -6,8 +6,13 @@ Author(s)
 |  |  https://forum.cheatengine.org/profile.php?mode=viewprofile&u=528606
 |  |  https://fearlessrevolution.com/memberlist.php?mode=viewprofile&u=30204
 Current table version
-|  1.0 -- 2019-06-27 18:18:43 (UTC)
+|  1.1 -- 2019-06-27 21:42:27 (UTC)
+|  |  https://gitlab.com/Nyqita/cheat-engine-
+|  |  ··· tables/blob/master/games/final_fantasy_7/Final%20Fantasy%207%20by%20Nyqita%20V1-1.CT
 Changelog
+|  Version 1.1
+|  |  Minor bug fixes
+|  |  |  Problem with cheat table not initialising the first time you try to activate it
 |  Version 1.0
 |  |  Most aspects of the cheat table support English, French, Spanish, and German
 |  |  |  Note: Most text was translated using Google Translate - https://translate.google.co.uk/
@@ -16,6 +21,7 @@ Changelog
 |  |  ··· had access to (FF7_EN, FF7_FR, FF7_ES, FF7_DE) and on each PlayStation version running on
 |  |  ··· each supported emulator
 |  |  Posted to fearlessrevolution.com
+|  |  |  https://fearlessrevolution.com/viewtopic.php?f=4&t=9748
 Currently supported game versions and emulators
 |  Supported emulators
 |  |  RetroArch v1.7.7 cores
@@ -567,6 +573,10 @@ Known issues
 |  |  If there is a suitable remedy, I will try to implement it. Until then, you can keep track of
 |  |  ··· the bug report at the official Cheat Engine forums
 |  |  https://forum.cheatengine.org/viewtopic.php?t=610281
+|  Version 1.0
+|  |  Table doesn't activate upon first attempt, but will activate without issue all subsequent
+|  |  ··· times
+|  |  |  Fixed in 1.1 and beyond
 Potential questions
 |  Why have you put all the LUA code in the enable section of the initialisation script, rather than
 |  ··· in the autorun portion of the script, or in an automatic script when the cheat table is
@@ -588,6 +598,10 @@ Potential questions
 |  |  ··· languages that use the Latin alphabet
 |  |  For further reading, please consult the qhimm.com wiki article on text encoding:
 |  |  http://web.archive.org/web/20161006234528/http://wiki.qhimm.com/view/FF7/Text_encoding
+|  Why have you attached the cheat table inside an archive instead of uploading it uncompressed?
+|  |  Every one of my attempts to attach the original .CT file to the forum thread resulted in
+|  |  ··· "Error parsing server response". A post in another thread mentioned this problem can be
+|  |  ··· avoided by simply putting the file into an unencrypted archive
 Final notes
 |  During the minification process, the comments made in the LUA scripts have been removed. These
 |  ··· comments provided links to references and source materials for all the code I used that was
