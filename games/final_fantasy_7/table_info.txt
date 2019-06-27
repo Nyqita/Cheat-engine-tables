@@ -12,6 +12,7 @@ Changelog
 	Version 1.1
 		Minor bug fixes
 			Cheat table initialisation script not activating the first time you try to enable it, but activating all subsequent times
+		Updating and reformatting documentation
 	Version 1.0
 		Most aspects of the cheat table support English, French, Spanish, and German
 			Note: Most text was translated using Google Translate - https://translate.google.co.uk/
@@ -45,8 +46,6 @@ Currently supported game versions and emulators
 		FF7_FR.exe version 1.0.9
 		FF7_ES.exe version 1.0.9
 		FF7_DE.exe version 1.0.9
-	
-		The cheat table might be compatible with other versions that are not listed, but I haven't tested them. If you intend to try using it with untested versions, then please do not save your game after making changes - unless you're sure that nothing was broken
 	Checking feature support
 		You can also check how many of the cheats have been implemented for each version of the game by doing the following:
 			Open up the LUA engine window
@@ -59,6 +58,7 @@ Currently supported game versions and emulators
 			Click the 'Execute' button to the right of the text entry box
 		This should list all the supported versions of the game and how many of the features have been added thus far
 			Note: Apologies if it's very confusing. Suffice to say, more 'Unimplemented addresses' means more features missing
+	The cheat table might be compatible with other versions that are not listed, but I haven't tested them. If you intend to try using it with untested versions, then please do not save your game after making changes - unless you're sure that nothing was brokenFeatures
 Features - abridged
 	Game version detection
 		Upon activating the initialisation script, it will attempt to determine which version of the game Cheat Engine is currently attached to
