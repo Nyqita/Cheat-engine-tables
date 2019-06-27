@@ -1,8 +1,8 @@
 Final Fantasy VII table for Cheat Engine
 Author(s)
 	Nyqita
-		https://github.com/nyqita
-		https://gitlab.com/Nyqita
+		https://github.com/Nyqita/Cheat-engine-tables/tree/master/games/final_fantasy_7
+		https://gitlab.com/Nyqita/cheat-engine-tables/tree/master/games/final_fantasy_7
 		https://forum.cheatengine.org/profile.php?mode=viewprofile&u=528606
 		https://fearlessrevolution.com/memberlist.php?mode=viewprofile&u=30204
 Current table version
