@@ -1,5 +1,5 @@
-function cleant_string(in_string, strip_white_spaces, remove_spaces, force_lower_case)
-  assert(1 == 0, "Don't call cleanString : not implemented")
+function clean_string(in_string, strip_white_spaces, remove_spaces, force_lower_case)
+  assert(1 == 0, "Don't call clean_string : not implemented")
   local rem_spc = remove_spaces or false
   local flc = force_lower_case or false
   local temp_str = in_string
@@ -25,7 +25,7 @@ function normalise_names(in_string, force_lower_case)
     { 'Offset', { 'os', 'off', 'offs', 'oset' } },
     { 'Type', { 'typ' } },
   }
-  debugPrint(8, "Normalising : " .. in_string, nil, "normaliseNames")
+  debug_print(8, "Normalising : " .. in_string, nil, "normalise_names")
   for i = 1, #replacements do
     local proper = replacements[i][1]
     for j = 1, #replacements[i][2] do
@@ -90,24 +90,23 @@ function table_to_string(in_table, delimiter, reversed, to_hex, return_all)
   local hex_table = {}
   local dec_string = ""
   local hex_string = ""
-  debugPrint(3, "Inside tableToString()", nil, "tableToString")
-  debugPrint(5, "Delimiter : " .. delimiter, nil, "tableToString")
-  debugPrint(5, "Reversed : " .. tostring(reversed), nil, "tableToString")
-  debugPrint(5, "To hex : " .. tostring(to_hex), nil, "tableToString")
-  debugPrint(5, "Return all : " .. tostring(return_all), nil, "tableToString")
+  debug_print(5, "Delimiter : " .. delimiter, nil, "table_to_string")
+  debug_print(5, "Reversed : " .. tostring(reversed), nil, "table_to_string")
+  debug_print(5, "To hex : " .. tostring(to_hex), nil, "table_to_string")
+  debug_print(5, "Return all : " .. tostring(return_all), nil, "table_to_string")
   if debug_verbosity >= 5 then
     recursive_print(in_table)
   end
   for i = 1, #in_table do
     local cur_val
-    debugPrint(7, "Iteration : " .. i, nil, "tableToString")
+    debug_print(7, "Iteration : " .. i, nil, "table_to_string")
     if reversed then
       cur_val = in_table[-i]
-      debugPrint(7, "Current value : " .. cur_val, nil, "tableToString")
+      debug_print(7, "Current value : " .. cur_val, nil, "table_to_string")
     else
       cur_val = in_table[i]
     end
-    debugPrint(7, "Current value : " .. cur_val, nil, "tableToString")
+    debug_print(7, "Current value : " .. cur_val, nil, "table_to_string")
     dec_table[i] = tostring(cur_val)
     hex_table[i] = hx(tonumber(cur_val))
     dec_string = dec_string .. tostring(cur_val) .. delimiter
@@ -116,8 +115,8 @@ function table_to_string(in_table, delimiter, reversed, to_hex, return_all)
 
   dec_string = string.sub(dec_string, 1, -2)
   hex_string = string.sub(hex_string, 1, -2)
-  debugPrint(5, "Decimal string : " .. dec_string, nil, "tableToString")
-  debugPrint(5, "Hexadecimal string : " .. hex_string, nil, "tableToString")
+  debug_print(5, "Decimal string : " .. dec_string, nil, "table_to_string")
+  debug_print(5, "Hexadecimal string : " .. hex_string, nil, "table_to_string")
 
   if return_all then
     local ret_data = {}
@@ -147,9 +146,9 @@ function to_byte_string(number, return_all_data, force_byte_length)
   local bytes_table = {}
   local bytes_string = ""
   local bytes_decimal_string = ""
-  debugPrint(3, "As hex : " .. as_hex, nil, "toByteString")
-  debugPrint(5, "Hex length : " .. hex_length, nil, "toByteString")
-  debugPrint(5, "Bytes length : " .. bytes_length, nil, "toByteString")
+  debug_print(3, "As hex : " .. as_hex, nil, "toByteString")
+  debug_print(5, "Hex length : " .. hex_length, nil, "toByteString")
+  debug_print(5, "Bytes length : " .. bytes_length, nil, "toByteString")
 
   for i = 1, math.floor(hex_length / 2) do
     if force_byte_length and #bytes_table == force_byte_length then
@@ -157,7 +156,7 @@ function to_byte_string(number, return_all_data, force_byte_length)
     end
     local start_cut = hex_length - (i * 2) + 1
     local end_cut = hex_length - ((i - 1) * 2)
-    debugPrint(7, "Start at char pos : " .. start_cut .. "  End at char pos : " .. end_cut, nil, "toByteString")
+    debug_print(7, "Start at char pos : " .. start_cut .. "  End at char pos : " .. end_cut, nil, "toByteString")
     local hex_chars = string.sub(as_hex, start_cut, end_cut)
     bytes_string = bytes_string .. hex_chars .. " "
     bytes_decimal_string = bytes_decimal_string .. string.format("%X", tonumber(hex_chars, 16)) .. " "

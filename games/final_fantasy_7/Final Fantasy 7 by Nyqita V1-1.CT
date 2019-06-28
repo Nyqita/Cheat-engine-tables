@@ -4,6 +4,7 @@
     <CheatEntry>
       <ID>4931</ID>
       <Description>"Activate / Activar / Activer / Aktivieren / 有効にする"</Description>
+      <Options moHideChildren="1"/>
       <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>[ENABLE]
@@ -2478,7 +2479,7 @@ guess_steam_values(ff7_es)
 steam_versions = { { "FF7_EN", "Final Fantasy VII for Steam (English)", ff7_steam_ENGLISH_v_1_0_9, "eng" }, { "FF7_FR", "Final Fantasy VII pour Steam (Français)", ff7_steam_FRENCH_v_1_0_9, "fre" }, { "FF7_ES", "Final Fantasy VII para Steam (Español)", ff7_steam_SPANISH_v_1_0_9, "spa" }, { "FF7_DE", "Final Fantasy VII für Steam (Deutsche)", ff7_steam_GERMAN_v_1_0_9, "ger" } }
 playstation_versions = { { "Final Fantasy VII for PlayStation (NTSC-U USA)", { "SCUS_94163", "SCUS_94164", "SCUS_94165" }, FF7_PSX_NTSC_US, "eng" }, { "Final Fantasy VII International for PlayStation (NTSC-J Japan)", { "SLPS_01057", "SLPS_01058", "SLPS_01059", "SLPS_01060" }, FF7_PSX_NTSC_JP_International, "eng" }, { "Final Fantasy VII for PlayStation (PAL Europe)", { "SCES_00867", "SCES_10867", "SCES_20867" }, FF7_PSX_PAL_UK, "eng" } }
 
-debug_ = 0
+debug_verbosity = 0
 set_base_mem()
 -- force_lang = "eng" -- "fre" / "eng" / "ger" / "spa"
 memrec.description = load_ff7_config()
@@ -3119,14 +3120,12 @@ delayed_deactivate(memrec)
                 <CheatEntry>
                   <ID>5653</ID>
                   <Description>"&lt;total_time_played&gt;"</Description>
-                  <LastState Value="56276" RealAddress="1AA96F84"/>
                   <VariableType>4 Bytes</VariableType>
                   <Address>base_mem + cfg.total_play_time</Address>
                 </CheatEntry>
                 <CheatEntry>
                   <ID>6162</ID>
                   <Description>"&lt;other_timers&gt;"</Description>
-                  <LastState Value="9258" RealAddress="1AA96F88"/>
                   <VariableType>2 Bytes</VariableType>
                   <Address>base_mem + cfg.total_play_time + 0x4</Address>
                 </CheatEntry>
@@ -3556,21 +3555,18 @@ lcd(memrec, true)
                 <CheatEntry>
                   <ID>5428</ID>
                   <Description>"Gil"</Description>
-                  <LastState Value="0" RealAddress="1AA97500"/>
                   <VariableType>2 Bytes</VariableType>
                   <Address>base_mem + cfg.post_battle + 8</Address>
                 </CheatEntry>
                 <CheatEntry>
                   <ID>4984</ID>
                   <Description>"EXP"</Description>
-                  <LastState Value="0" RealAddress="1AA974F8"/>
                   <VariableType>2 Bytes</VariableType>
                   <Address>base_mem + cfg.post_battle</Address>
                 </CheatEntry>
                 <CheatEntry>
                   <ID>4985</ID>
                   <Description>"AP"</Description>
-                  <LastState Value="0" RealAddress="1AA974FC"/>
                   <VariableType>2 Bytes</VariableType>
                   <Address>base_mem + cfg.post_battle + 4</Address>
                 </CheatEntry>
@@ -3581,7 +3577,6 @@ lcd(memrec, true)
               <Description>"&lt;battles_entered&gt;"</Description>
               <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">65535:Everything
 </DropDownList>
-              <LastState Value="0" RealAddress="1AA96FC0"/>
               <VariableType>2 Bytes</VariableType>
               <Address>base_mem + cfg.save_phs - 6</Address>
             </CheatEntry>
@@ -3590,7 +3585,6 @@ lcd(memrec, true)
               <Description>"&lt;battles_fled&gt;"</Description>
               <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">65535:Everything
 </DropDownList>
-              <LastState Value="0" RealAddress="1AA96FC2"/>
               <VariableType>2 Bytes</VariableType>
               <Address>base_mem + cfg.save_phs - 4</Address>
             </CheatEntry>
@@ -3606,28 +3600,24 @@ lcd(memrec, true)
             <CheatEntry>
               <ID>4986</ID>
               <Description>"Gil"</Description>
-              <LastState Value="240" RealAddress="1AA96F80"/>
               <VariableType>4 Bytes</VariableType>
               <Address>base_mem + cfg.gil</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>6222</ID>
               <Description>"GP"</Description>
-              <LastState Value="0" RealAddress="1AA970F2"/>
               <VariableType>4 Bytes</VariableType>
               <Address>base_mem + cfg.gil + 0x172</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>6401</ID>
               <Description>"&lt;battle_points&gt;"</Description>
-              <LastState Value="0" RealAddress="1AA970F8"/>
               <VariableType>2 Bytes</VariableType>
               <Address>base_mem + cfg.gil + 0x178</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>6399</ID>
               <Description>"&lt;battle_arena_points&gt;"</Description>
-              <LastState Value="0" RealAddress="1AA97018"/>
               <VariableType>4 Bytes</VariableType>
               <Address>base_mem + cfg.gil + 0x98</Address>
             </CheatEntry>
@@ -3818,7 +3808,6 @@ delayed_deactivate(memrec)
                   <Description>"weapon_stat_bonus_template"</Description>
                   <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">255:None
 </DropDownList>
-                  <LastState Value="255" RealAddress="1AA6D5D9"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + 0x738B9</Address>
                 </CheatEntry>
@@ -3828,7 +3817,6 @@ delayed_deactivate(memrec)
                   <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">3:Long Range
 35:Close Range
 </DropDownList>
-                  <LastState Value="35" RealAddress="1AA6D5C0"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + 0x738A0</Address>
                 </CheatEntry>
@@ -3864,7 +3852,6 @@ delayed_deactivate(memrec)
 25:Paralyzed
 26:Darkness
 </DropDownList>
-                  <LastState Value="255" RealAddress="1AA6D5C5"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + cfg.weapon_stats_base + 0x5</Address>
                 </CheatEntry>
@@ -4170,7 +4157,7 @@ delayed_deactivate(memrec)
 318:Sneak Glove
 319:HypnoCrown
 </DropDownList>
-                  <LastState Value="" RealAddress="1AA96900"/>
+                  <LastState Value="" RealAddress="00000000"/>
                   <VariableType>Custom</VariableType>
                   <CustomType>Menu Item ID</CustomType>
                   <Address>base_mem + 0x9CBE0</Address>
@@ -4184,7 +4171,6 @@ delayed_deactivate(memrec)
 0706:[ · ]==[ · ]
 0302:[O]==[O]
 </DropDownList>
-                  <LastState Value="0706" RealAddress="1AA6D5DC"/>
                   <ShowAsHex>1</ShowAsHex>
                   <VariableType>2 Bytes</VariableType>
                   <Address>base_mem + 0x738BC</Address>
@@ -4277,7 +4263,6 @@ delayed_deactivate(memrec)
 89:Knights of Round
 90:Master Summon
 </DropDownList>
-                  <LastState Value="255" RealAddress="1AA96B80"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + 0x9CE60</Address>
                 </CheatEntry>
@@ -4289,7 +4274,6 @@ delayed_deactivate(memrec)
 2:Double
 3:Triple
 </DropDownList>
-                  <LastState Value="1" RealAddress="1AA6D5C6"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + 0x738A6</Address>
                 </CheatEntry>
@@ -4298,7 +4282,6 @@ delayed_deactivate(memrec)
                   <Description>"materia_exp_template"</Description>
                   <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">16777215:Master
 </DropDownList>
-                  <LastState Value="16777215" RealAddress="1AA96B81"/>
                   <VariableType>Custom</VariableType>
                   <CustomType>3 Bytes</CustomType>
                   <Address>base_mem + 0x9CE60 + 1</Address>
@@ -4435,7 +4418,6 @@ delayed_deactivate(memrec)
 126:Death Penalty
 127:Masamune
 </DropDownList>
-                  <LastState Value="0" RealAddress="1AA96474"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + 0x9C754</Address>
                 </CheatEntry>
@@ -4475,7 +4457,6 @@ delayed_deactivate(memrec)
 30:Precious Watch
 31:Chocobracelet
 </DropDownList>
-                  <LastState Value="0" RealAddress="1AA96475"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + 0x9C755</Address>
                 </CheatEntry>
@@ -4516,7 +4497,6 @@ delayed_deactivate(memrec)
 30:Sneak Glove
 31:HypnoCrown
 </DropDownList>
-                  <LastState Value="255" RealAddress="1AA96476"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + 0x9C756</Address>
                 </CheatEntry>
@@ -4534,7 +4514,6 @@ delayed_deactivate(memrec)
 64:Cait Sith
 128:Vincent
 </DropDownList>
-                  <LastState Value="1" RealAddress="1AA6D5CE"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + 0x738AE</Address>
                 </CheatEntry>
@@ -4544,7 +4523,6 @@ delayed_deactivate(memrec)
                   <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Male
 1:Female
 </DropDownList>
-                  <LastState Value="0" RealAddress="1AA971D6"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + 0x9D4B6</Address>
                 </CheatEntry>
@@ -4557,7 +4535,6 @@ delayed_deactivate(memrec)
 3:Black
 4:Gold
 </DropDownList>
-                  <LastState Value="0" RealAddress="1AA971D7"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + 0x9D4B7</Address>
                 </CheatEntry>
@@ -4575,7 +4552,6 @@ delayed_deactivate(memrec)
 8:A
 9:S
 </DropDownList>
-                  <LastState Value="0" RealAddress="1AA971D5"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + 0x9D4B5</Address>
                 </CheatEntry>
@@ -4594,7 +4570,6 @@ delayed_deactivate(memrec)
 8:Cid
 10:Sephiroth
 </DropDownList>
-                  <LastState Value="1" RealAddress="1AA968FC"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + 0x9CBDC</Address>
                 </CheatEntry>
@@ -4609,7 +4584,6 @@ delayed_deactivate(memrec)
 4:Dexterity
 5:Luck
 </DropDownList>
-                  <LastState Value="255" RealAddress="1AA6D5D9"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + 0x738B9</Address>
                 </CheatEntry>
@@ -4618,7 +4592,6 @@ delayed_deactivate(memrec)
                   <Description>"debug_flag_template"</Description>
                   <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">65:Debug enabled
 </DropDownList>
-                  <LastState Value="0" RealAddress="1AA94916"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + cfg.current_screen + 0xB9A</Address>
                 </CheatEntry>
@@ -4627,7 +4600,6 @@ delayed_deactivate(memrec)
                   <Description>"current_screen_template"</Description>
                   <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">65:Debug Room
 </DropDownList>
-                  <LastState Value="0" RealAddress="1AA93D7C"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + cfg.current_screen</Address>
                 </CheatEntry>
@@ -4638,7 +4610,6 @@ delayed_deactivate(memrec)
 16:Sadness
 32:Fury
 </DropDownList>
-                  <LastState Value="0" RealAddress="1AA96477"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + cfg.real_stats_base + 0x1D</Address>
                 </CheatEntry>
@@ -4650,7 +4621,6 @@ delayed_deactivate(memrec)
 1:Invalid
 2:Halve
 </DropDownList>
-                  <LastState Value="255" RealAddress="1AA6B948"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + cfg.accessory_stats_base + 4</Address>
                 </CheatEntry>
@@ -4664,7 +4634,6 @@ delayed_deactivate(memrec)
 3:Reflect
 6:Barrier
 </DropDownList>
-                  <LastState Value="255" RealAddress="1AA6B949"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + cfg.accessory_stats_base + 5</Address>
                 </CheatEntry>
@@ -4674,7 +4643,6 @@ delayed_deactivate(memrec)
                   <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Unprotected
 1:Protected
 </DropDownList>
-                  <LastState Value="1" RealAddress="1AA6B94A"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>0</BitStart>
                   <BitLength>1</BitLength>
@@ -4687,7 +4655,6 @@ delayed_deactivate(memrec)
                   <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Unavailable
 1:Available
 </DropDownList>
-                  <LastState Value="0" RealAddress="1AA96FC4"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>0</BitStart>
                   <BitLength>1</BitLength>
@@ -4700,7 +4667,6 @@ delayed_deactivate(memrec)
                   <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Unavailable
 1:Available
 </DropDownList>
-                  <LastState Value="0" RealAddress="1AA96FC4"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>0</BitStart>
                   <BitLength>1</BitLength>
@@ -4729,14 +4695,12 @@ delayed_deactivate(memrec)
                       <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:On
 0:Off
 </DropDownList>
-                      <LastState Value="19" RealAddress="1AB0FFA0"/>
                       <VariableType>Byte</VariableType>
                       <Address>base_mem + cfg.random_battles_world_enabled</Address>
                     </CheatEntry>
                     <CheatEntry>
                       <ID>5026</ID>
                       <Description>"&lt;random_battle_world_map_distance&gt;"</Description>
-                      <LastState Value="DCDD0011" RealAddress="1AB0FF9C"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>4 Bytes</VariableType>
                       <Address>base_mem + cfg.random_battles_world_safe_distance</Address>
@@ -4744,14 +4708,12 @@ delayed_deactivate(memrec)
                     <CheatEntry>
                       <ID>7073</ID>
                       <Description>"&lt;random_battle_world_map_loop&gt;"</Description>
-                      <LastState Value="35" RealAddress="1AB0FFA4"/>
                       <VariableType>Byte</VariableType>
                       <Address>base_mem + cfg.random_battles_world_loop_tick</Address>
                     </CheatEntry>
                     <CheatEntry>
                       <ID>7074</ID>
                       <Description>"&lt;random_battle_world_map_counter&gt;"</Description>
-                      <LastState Value="34" RealAddress="1AB0FFA5"/>
                       <VariableType>Byte</VariableType>
                       <Address>base_mem + cfg.random_battles_world_loop_count</Address>
                     </CheatEntry>
@@ -4767,7 +4729,6 @@ delayed_deactivate(memrec)
                     <CheatEntry>
                       <ID>5025</ID>
                       <Description>"&lt;random_battle_field_map_loop&gt;"</Description>
-                      <LastState Value="0" RealAddress="1AA6B45C"/>
                       <VariableType>2 Bytes</VariableType>
                       <Address>base_mem + cfg.random_battles_field</Address>
                     </CheatEntry>
@@ -4811,7 +4772,6 @@ lcd(memrec, true)
 0200:PHS only
 0300:Disabled
 </DropDownList>
-              <LastState Value="0000" RealAddress="1AA96FC6"/>
               <ShowAsHex>1</ShowAsHex>
               <VariableType>2 Bytes</VariableType>
               <Address>base_mem + cfg.save_phs</Address>
@@ -4827,7 +4787,6 @@ lcd(memrec, true)
                   <ID>7231</ID>
                   <Description>"&lt;debug_mode_1&gt;"</Description>
                   <DropDownListLink>current_screen_template</DropDownListLink>
-                  <LastState Value="0" RealAddress="1AA93D7C"/>
                   <VariableType>2 Bytes</VariableType>
                   <Address>base_mem + cfg.current_screen</Address>
                 </CheatEntry>
@@ -4835,7 +4794,6 @@ lcd(memrec, true)
                   <ID>7232</ID>
                   <Description>"&lt;debug_mode_2&gt;"</Description>
                   <DropDownListLink>debug_flag_template</DropDownListLink>
-                  <LastState Value="0" RealAddress="1AA94916"/>
                   <VariableType>2 Bytes</VariableType>
                   <Address>base_mem + cfg.debug_mode_2</Address>
                 </CheatEntry>
@@ -4858,7 +4816,6 @@ lcd(memrec, true)
                     <CheatEntry>
                       <ID>7486</ID>
                       <Description>"&lt;rgb_array&gt;"</Description>
-                      <LastState Value="0 88 176 0 0 128 0 0 80 0 0 32 88 2 0 0" RealAddress="1AA42F28"/>
                       <VariableType>Array of byte</VariableType>
                       <ByteLength>16</ByteLength>
                       <Address>base_mem + cfg.menu_rgb</Address>
@@ -4866,7 +4823,6 @@ lcd(memrec, true)
                     <CheatEntry>
                       <ID>7063</ID>
                       <Description>"&lt;rgb_top_left&gt;"</Description>
-                      <LastState Value="0 88 176" RealAddress="1AA42F28"/>
                       <VariableType>Array of byte</VariableType>
                       <ByteLength>3</ByteLength>
                       <Address>base_mem + cfg.menu_rgb</Address>
@@ -4874,7 +4830,6 @@ lcd(memrec, true)
                     <CheatEntry>
                       <ID>6412</ID>
                       <Description>"&lt;rgb_top_right&gt;"</Description>
-                      <LastState Value="0 0 128" RealAddress="1AA42F2B"/>
                       <VariableType>Array of byte</VariableType>
                       <ByteLength>3</ByteLength>
                       <Address>base_mem + cfg.menu_rgb + cfg.menu_rgb_offset</Address>
@@ -4882,7 +4837,6 @@ lcd(memrec, true)
                     <CheatEntry>
                       <ID>6413</ID>
                       <Description>"&lt;rgb_bottom_left&gt;"</Description>
-                      <LastState Value="0 0 80" RealAddress="1AA42F2E"/>
                       <VariableType>Array of byte</VariableType>
                       <ByteLength>3</ByteLength>
                       <Address>base_mem + cfg.menu_rgb + (cfg.menu_rgb_offset * 2)</Address>
@@ -4890,7 +4844,6 @@ lcd(memrec, true)
                     <CheatEntry>
                       <ID>6414</ID>
                       <Description>"&lt;rgb_bottom_right&gt;"</Description>
-                      <LastState Value="0 0 32" RealAddress="1AA42F31"/>
                       <VariableType>Array of byte</VariableType>
                       <ByteLength>3</ByteLength>
                       <Address>base_mem + cfg.menu_rgb + (cfg.menu_rgb_offset * 3)</Address>
@@ -4900,21 +4853,18 @@ lcd(memrec, true)
                 <CheatEntry>
                   <ID>6402</ID>
                   <Description>"&lt;battle_speed&gt;"</Description>
-                  <LastState Value="0" RealAddress="1AA974DC"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + cfg.config_menu_settings</Address>
                 </CheatEntry>
                 <CheatEntry>
                   <ID>7061</ID>
                   <Description>"&lt;battle_message_speed&gt;"</Description>
-                  <LastState Value="0" RealAddress="1AA974DD"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + cfg.config_menu_settings + 1</Address>
                 </CheatEntry>
                 <CheatEntry>
                   <ID>7062</ID>
                   <Description>"&lt;field_message_speed&gt;"</Description>
-                  <LastState Value="0" RealAddress="1AA974F0"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + cfg.config_menu_settings + 0x14</Address>
                 </CheatEntry>
@@ -4931,7 +4881,6 @@ lcd(memrec, true)
                   <ID>6906</ID>
                   <Description>"&lt;roster_top_char&gt;"</Description>
                   <DropDownListLink>character_id_template</DropDownListLink>
-                  <LastState Value="1" RealAddress="1AA968FC"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + cfg.current_roster</Address>
                 </CheatEntry>
@@ -4939,7 +4888,6 @@ lcd(memrec, true)
                   <ID>6908</ID>
                   <Description>"&lt;roster_mid_char&gt;"</Description>
                   <DropDownListLink>character_id_template</DropDownListLink>
-                  <LastState Value="2" RealAddress="1AA968FD"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + cfg.current_roster + 1</Address>
                 </CheatEntry>
@@ -4947,7 +4895,6 @@ lcd(memrec, true)
                   <ID>6907</ID>
                   <Description>"&lt;roster_bot_char&gt;"</Description>
                   <DropDownListLink>character_id_template</DropDownListLink>
-                  <LastState Value="0" RealAddress="1AA968FE"/>
                   <VariableType>Byte</VariableType>
                   <Address>base_mem + cfg.current_roster + 2</Address>
                 </CheatEntry>

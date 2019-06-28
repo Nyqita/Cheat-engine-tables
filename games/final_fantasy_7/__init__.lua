@@ -70,7 +70,6 @@ initial_weapons = {
   },
 }
 
--- Reference : https://finalfantasy.fandom.com/wiki/Final_Fantasy_VII_elements
 perfect_weapon_stats_1 = { 0x03, 0xFF, 0x11, 0xFF, 0xFE, 0xFF, 0x03, 0x00, 0xFE, 0x00, 0xFF, 0xF8, 0xFF, 0xFF }
 perfect_weapon_stats_2 = { 0x02, 0x00, 0x04, 0xFF, 0xFF, 0x02, 0xFF, 0xFF, 0xFF, 0xFE, 0xFE, 0xFF, 0xFF, 0x06, 0x07, 0x06, 0x07, 0x06, 0x07, 0x06, 0x07, 0x12, 0x1B, 0x05, 0x09, 0xFF, 0xFF, 0xFF, 0xFF }
 
@@ -185,7 +184,6 @@ function custom_type_menu_item_qty()
   local typename = "FF7 Menu Item Quantity"
   local bytecount = 2
   local functionbasename = "ff7_menu_item_qty_"
-
   function ff7_menu_item_qty_bytestovalue(b1, b2, address)
     if (b1 == 255) and (b2 == 255) then
       return 0
@@ -193,7 +191,6 @@ function custom_type_menu_item_qty()
     local props = final_fantasy_vii_menu_items(b1, b2)
     return props.qty
   end
-
   function ff7_menu_item_qty_valuetobytes(integer, address)
     local b_1, b_2 = readBytes(address, 2, false)
     local i_rem = b_2 % 2
@@ -202,7 +199,6 @@ function custom_type_menu_item_qty()
     end
     return b_1, ((integer * 2) + i_rem)
   end
-
   registerCustomTypeLua(typename, bytecount, ff7_menu_item_qty_bytestovalue, ff7_menu_item_qty_valuetobytes, isFloat)
 end
 
@@ -211,7 +207,6 @@ function custom_type_menu_item_id()
   local typename = "FF7 Menu Item ID"
   local bytecount = 2
   local functionbasename = "ff7_menu_item_id_"
-
   function ff7_menu_item_id_bytestovalue(b1, b2, address)
     if (b1 == 255) and (b2 == 255) then
       return 65535
@@ -219,7 +214,6 @@ function custom_type_menu_item_id()
     local props = final_fantasy_vii_menu_items(b1, b2)
     return props.id
   end
-
   function ff7_menu_item_id_valuetobytes(integer, address)
     local b_1, b_2 = readBytes(address, 2, false)
     local cur_qty = b_2 // 2
@@ -227,7 +221,6 @@ function custom_type_menu_item_id()
     local id_byte = integer % 256
     return id_byte, qty_byte
   end
-
   registerCustomTypeLua(typename, bytecount, ff7_menu_item_id_bytestovalue, ff7_menu_item_id_valuetobytes, isFloat)
 end
 
@@ -236,37 +229,29 @@ function custom_type_3_bytes()
   local typename = "3 Bytes"
   local bytecount = 3
   local functionbasename = "three_bytes_"
-
   function three_bytes_bytestovalue(b1, b2, b3, address)
-    --debugPrint(10, "In bytes : " .. nb(b1) .. nb(b2) .. nb(b3), nil, "3_Bytes : bytesToValue")
     local total = b1 + (b2 * 256) + (b3 * (256 ^ 2))
-    --debugPrint(10, "Total : " .. nb(total), nil, "3_Bytes : bytesToValue")
     return total
   end
-
   function three_bytes_valuetobytes(integer, address)
-    --debugPrint(10, "Value : " .. nb(integer), nil, "3_Bytes : valueToBytes")
     local hex_str = "000000" .. string.format("%X", integer)
-    --debugPrint(10, "Hex string : " .. hex_str, nil, "3_Bytes : valueToBytes")
     local b_1 = tonumber(hex_str:sub(#hex_str - 1, #hex_str), 16)
     local b_2 = tonumber(hex_str:sub(#hex_str - 3, #hex_str - 2), 16)
     local b_3 = tonumber(hex_str:sub(#hex_str - 5, #hex_str - 4), 16)
-    --debugPrint(10, "Bytes : " .. nb(b_1) .. nb(b_2) .. nb(b_3), nil, "3_Bytes : valueToBytes")
     return b_1, b_2, b_3
   end
-
   registerCustomTypeLua(typename, bytecount, three_bytes_bytestovalue, three_bytes_valuetobytes, isFloat)
 end
 
 function custom_type_ff7_string()
+  -- This was supposed to correctly display text from the game memory
+  -- I don't know how to make a custom type show a string instead of a number
   assert(1 == 0, "Don't call custom_type_ff7_string : not implemented")
   local typename = "FF7 String"
   local bytecount = 9
   local functionbasename = "ff7_string_"
-
   function ff7_string_bytestovalue(b1, b2, b3, b4, b5, b6, b7, b8, b9, address)
     local chars = { b1, b2, b3, b4, b5, b6, b7, b8, b9 }
-    --rPrint(chars)
     local shift_value = 32
     local out_string = ""
     for i = 1, #chars do
@@ -289,17 +274,19 @@ function register_custom_types()
   custom_type_menu_item_qty()
   custom_type_menu_item_id()
   custom_type_3_bytes()
-  --custom_type_ff7_string()
 end
 
-function load_ff7_config()
+function load_ff7_config(memory_record, deactivate_on_fail_time)
+  memory_record.Description = "Loading ..."
   if process then
     for i = 1, #steam_versions do
       if process == (steam_versions[i][1]) .. ".exe" then
         cfg = steam_versions[i][3]
         base_mem = 0x400000
         current_lang = force_lang or steam_versions[i][4]
-        return (steam_versions[i][2])
+        local out_string = (steam_versions[i][2])
+        memory_record.Description = out_string
+        return out_string
       end
     end
     local game_ver = detect_ps1_game_version()
@@ -308,12 +295,17 @@ function load_ff7_config()
         if playstation_versions[i][2][j] == game_ver then
           cfg = playstation_versions[i][3]
           current_lang = force_lang or playstation_versions[i][4]
-          return playstation_versions[i][1] .. " (" .. game_ver .. ")"
+          local out_string = playstation_versions[i][1] .. " (" .. game_ver .. ")"
+          memory_record.Description = out_string
+          return out_string
         end
       end
     end
   end
-  return "Could not detect game version and load its config"
+  local error_message = "Could not detect game version and load its config"
+  memory_record.Description = error_message
+  if deactivate_on_fail_time then delayed_deactivate(memory_record, deactivate_on_fail_time) end
+  return error_message
 end
 
 function set_base_mem()
@@ -322,27 +314,24 @@ function set_base_mem()
     { "mednafen_psx_libretro.dll", 0x52ED00 },
     { "ePSXe.exe", 0xA82020 },
   }
-
   processes = {
     { "ePSXe.exe", 0xA82020 },
   }
-  debugPrint(2, "Invoked set_modules()", nil, "set_modules")
   for i = 1, #modules do
-    debugPrint(4, "Checking for " .. modules[i][1], nil, "set_modules")
+    debug_print(4, "Checking for " .. modules[i][1], nil, "set_base_mem")
     local mod_mem = getAddressSafe(modules[i][1])
     if mod_mem then
-      debugPrint(4, "Found " .. modules[i][1], nil, "set_modules")
+      debug_print(4, "Found " .. modules[i][1], nil, "set_base_mem")
       module_address = mod_mem
       base_mem = mod_mem + modules[i][2]
-      debugPrint(6, "module_address = " .. mod_mem .. "  base_mem = " .. base_mem, nil, "set_modules")
+      debug_print(6, "module_address = " .. mod_mem .. "  base_mem = " .. base_mem, nil, "set_base_mem")
       return
     end
   end
-
   for i = 1, #processes do
     if process == processes[i][1] then
       base_mem = processes[i][2]
-      debugPrint(4, "Found " .. process, nil, "set_modules")
+      debug_print(4, "Found " .. process, nil, "set_base_mem")
       return
     end
   end
@@ -361,23 +350,19 @@ function compare_versions()
   print("[INFO] Comparing feature support for each known version of Final Fantasy VII")
   print("[INFO] More unimplemented addresses generally means more features missing")
   local version_table = {}
-
   for i = 1, #steam_versions do
     version_table[#version_table + 1] = { steam_versions[i][2], steam_versions[i][3] }
   end
-
   for i = 1, #playstation_versions do
     version_table[#version_table + 1] = { playstation_versions[i][1], playstation_versions[i][3] }
   end
-
   for i = 1, #version_table do
     local table_ = check_matching_values(version_table[i][2], unimplemented)
-    --local out_string = "Total addresses : " .. table_.key_count .. "  Unimplemented addresses : " .. table_.matched_count .. "   Name : " .. version_table[i][1]
     local out_string = "Name : " .. version_table[i][1] .. "\nTotal addresses : " .. table_.key_count .. "\nUnimplemented addresses : " .. table_.matched_count
     print(out_string)
     print("Missing addresses")
-    for i = 1, #table_.matched_keys do
-      print("\t" .. table_.matched_keys[i])
+    for j = 1, #table_.matched_keys do
+      print("\t" .. table_.matched_keys[j])
     end
     print("-----------------------------------------")
   end
@@ -400,14 +385,12 @@ function final_fantasy_vii_menu_items(number, byte_2)
     id_byte = number
     qty_byte = byte_2
   end
-
   props.id_byte = id_byte
   props.qty_byte = qty_byte
   props.id = id_byte + ((qty_byte % 2) * 256)
   props.qty = math.floor(qty_byte / 2)
-
   if debug_verbosity > 7 then
-    debugPrint(7, "Properties table : ", nil, "final_fantasy_vii_menu_items")
+    debug_print(7, "Properties table : ", nil, "final_fantasy_vii_menu_items")
     recursive_print(props)
   end
   return props
@@ -420,7 +403,6 @@ function find_ff7_base_mem()
 end
 
 function set_data()
-
   weapon_stats = {
     ['shape'] = { "off", "type", "desc" },
     { 4, 0, tr.atk[current_lang] },
@@ -451,7 +433,6 @@ function set_data()
     }) },
     { 0xE, 0, tr.equip_char[current_lang], ddl = "equippable_character_template" },
   }
-
   armour_stats = {
     ['shape'] = { "off", "type", "desc" },
     { 2, 0, tr.def[current_lang] },
@@ -483,7 +464,6 @@ function set_data()
     } },
     { 0x12, 0, tr.equip_char[current_lang], ddl = "equippable_character_template" },
   }
-
   accessory_stats = {
     shape = { "off", "type", "desc" },
     { 0, 0, tr.bonus_stat[current_lang], ddl = "armour_stat_bonus_template", children = {
@@ -507,7 +487,6 @@ function set_data()
       { 6, { ['type'] = 9, ['options'] = { ['Binary.Startbit'] = 7, ['Binary.Size'] = 1 } }, elem_names[current_lang][8] },
       { 7, { ['type'] = 9, ['options'] = { ['Binary.Startbit'] = 0, ['Binary.Size'] = 1 } }, elem_names[current_lang][9] },
     }) },
-
     { nil, "header", tr.status_def[current_lang], options = "moHideChildren", children = create_shaped_table({
       ['shape'] = { "off", "type", "desc", ['ddl'] = "has_protection_template" },
       { 8, { ['type'] = 9, ['options'] = { ['Binary.Startbit'] = 0, ['Binary.Size'] = 1 } }, sta_names[current_lang][1] },
@@ -541,7 +520,6 @@ function set_data()
     --{ 14, 0, "?? byte 14" },
     --{ 15, 0, "?? byte 15" },
   }
-
   real_stats = {
     shape = { "off", "type", "desc" },
     { 13, 0, tr.lb[current_lang] },
@@ -579,7 +557,6 @@ function set_data()
     --{ 56, 0, "?? Attack effect 2", hex = true },
     { 126, 2, tr.exp_to_level[current_lang] },
   }
-
   display_stats = {
     shape = { "Offset", "Type", "Description" },
     { 14, 1, tr.cur_hp[current_lang] },
@@ -597,7 +574,6 @@ function set_data()
     { 10, 1, tr.mag_atk[current_lang] },
     { 12, 1, tr.mag_def[current_lang] },
   }
-
   battle_stats = {
     shape = { "Offset", "Type", "Description" },
     { -4, 1, tr.cur_mp[current_lang] },
@@ -605,15 +581,12 @@ function set_data()
     { 0, 2, tr.cur_hp[current_lang] },
     { 4, 2, tr.max_hp[current_lang] },
   }
-
   battle_atb = {
     { 0, 0, tr.atb[current_lang] },
   }
-
   battle_limit_break = {
     { 0, 0, tr.lb[current_lang] },
   }
-
   chocobo_stats_1 = {
     -- http://forums.qhimm.com/index.php?topic=3241.0
     shape = { "off", "type", "desc" },
@@ -629,12 +602,10 @@ function set_data()
     { 0xA, 0, tr.intel[current_lang] },
     { 0xB, 0, tr.persona[current_lang] },
   }
-
   chocobo_stats_2 = {
     shape = { "off", "type", "desc" },
     { 0, 1, tr.stamina[current_lang] },
   }
-
   battle_char_names = {
     tr.top_char[current_lang],
     tr.mid_char[current_lang],
@@ -646,7 +617,6 @@ function set_data()
     tr.enemy[current_lang] .. " 4",
     tr.enemy[current_lang] .. " 5",
   }
-
   menu_options = create_shaped_table({
     ['shape'] = { "off", "type", "desc", ['ddl'] = "menu_options_template" },
     { 0, { ['type'] = 9, ['options'] = { ['Binary.Startbit'] = 0, ['Binary.Size'] = 1 } }, tr.item[current_lang] },
@@ -660,7 +630,6 @@ function set_data()
     { 1, { ['type'] = 9, ['options'] = { ['Binary.Startbit'] = 0, ['Binary.Size'] = 1 } }, tr.phs[current_lang] },
     { 1, { ['type'] = 9, ['options'] = { ['Binary.Startbit'] = 1, ['Binary.Size'] = 1 } }, tr.save[current_lang] },
   })
-
 end
 
 register_custom_types()

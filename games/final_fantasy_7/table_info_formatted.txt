@@ -5,8 +5,8 @@ Author(s)
 |  |  https://gitlab.com/Nyqita/cheat-engine-tables/tree/master/games/final_fantasy_7
 |  |  https://forum.cheatengine.org/profile.php?mode=viewprofile&u=528606
 |  |  https://fearlessrevolution.com/memberlist.php?mode=viewprofile&u=30204
-Current table version
-|  1.1 -- 2019-06-27 21:42:27 (UTC)
+Latest table version
+|  1.1 -- 2019-06-28 09:04:07 (UTC)
 |  |  https://gitlab.com/Nyqita/cheat-engine-
 |  |  ··· tables/blob/master/games/final_fantasy_7/Final%20Fantasy%207%20by%20Nyqita%20V1-1.CT
 Changelog
@@ -16,6 +16,8 @@ Changelog
 |  |  |  ··· activating all subsequent times
 |  |  Updated and reformatted documentation
 |  |  Added a few missing translations
+|  |  Will now automatically deactivate the initialisation script after a few seconds in the event
+|  |  ··· that a game version cannot be detected
 |  Version 1.0
 |  |  Most aspects of the cheat table support English, French, Spanish, and German
 |  |  |  Note: Most text was translated using Google Translate - https://translate.google.co.uk/
@@ -69,7 +71,7 @@ Currently supported game versions and emulators
 |  |  |  ··· means more features missing
 |  The cheat table might be compatible with other versions that are not listed, but I haven't tested
 |  ··· them. If you intend to try using it with untested versions, then please do not save your game
-|  ··· after making changes - unless you're sure that nothing was brokenFeatures
+|  ··· after making changes - unless you're sure that nothing was broken
 Features - abridged
 |  Game version detection
 |  |  Upon activating the initialisation script, it will attempt to determine which version of the

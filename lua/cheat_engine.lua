@@ -32,7 +32,7 @@ end
 
 function check_bytes(address, in_val)
   assert(1 == 0, "Don't call loadLuaFile : not implemented")
-  debugPrint(3, "Address : " .. nb(address) .. "  Value : " .. nb(in_val), nil, "checkBytes()")
+  debug_print(3, "Address : " .. nb(address) .. "  Value : " .. nb(in_val), nil, "checkBytes()")
   local check_val = to_byte_string(in_val, true)
   local check_bytes = table_to_string(check_val.bytes_table)
   local check_length = check_val.bytes_length
@@ -44,12 +44,12 @@ function check_bytes(address, in_val)
 
   local simple_f = table.concat(found_array, "")
   local simple_c = table.concat(to_byte_string(in_val), "")
-  debugPrint(7, "Simple found string : " .. simple_f .. "  Simple check string : " .. simple_c, nil, "checkBytes()")
+  debug_print(7, "Simple found string : " .. simple_f .. "  Simple check string : " .. simple_c, nil, "checkBytes()")
   if simple_f == simple_c then
-    debugPrint(3, "Values match", nil, "checkBytes()")
+    debug_print(3, "Values match", nil, "checkBytes()")
     return true
   end
-  debugPrint(3, "Values do not match", nil, "checkBytes()")
+  debug_print(3, "Values do not match", nil, "checkBytes()")
   return false
 end
 
@@ -67,25 +67,25 @@ function detect_ps1_game_version()
   end
 
   if game_sig then
-    debugPrint(4, "Signature : " .. string.pstring(game_sig), nil, "detect_ps1_game_version")
+    debug_print(4, "Signature : " .. string.pstring(game_sig), nil, "detect_ps1_game_version")
     search_sig = string_to_byte_string(game_sig, "00 00 00 00 ")
   else
     search_sig = "00 00 00 00 00 00 00 00 63 64 72 6F 6D 3A 5C"
   end
-  debugPrint(4, "Searching for bytes : " .. string.pstring(search_sig), nil, "detect_ps1_game_version")
+  debug_print(4, "Searching for bytes : " .. string.pstring(search_sig), nil, "detect_ps1_game_version")
 
   local aob_results
   --aob_results = AOBScan(search_sig).Text
   aob_results = easy_scan(base_mem, nil, search_sig)
   aob_results = string.format("%X", aob_results)
-  debugPrint(4, "Found " .. aob_results, nil, "detect_ps1_game_version")
+  debug_print(4, "Found " .. aob_results, nil, "detect_ps1_game_version")
 
   local cdrom_addr = tonumber(tostring(aob_results), 16)
-  debugPrint(5, "Game identifier string address : " .. nb(cdrom_addr), nil, "detect_ps1_game_version")
+  debug_print(5, "Game identifier string address : " .. nb(cdrom_addr), nil, "detect_ps1_game_version")
   local game_version_string = readString(cdrom_addr + #string.split(search_sig, " "))
   game_version_string = string.split(game_version_string, ";")[1]
   game_version_string = string.gsub(game_version_string, "%.", "")
-  debugPrint(5, "Game identifier string : " .. game_version_string, nil, "detect_ps1_game_version")
+  debug_print(5, "Game identifier string : " .. game_version_string, nil, "detect_ps1_game_version")
   return game_version_string
 end
 
@@ -157,9 +157,9 @@ DropDownDescription: Array
   local DropDownReadOnly
   local DropDownDescriptionOnly
   if options then
-    DisplayAsDropDownListItem = setOptional(options.dadli, false)
-    DropDownReadOnly = setOptional(options.ddro, false)
-    DropDownDescriptionOnly = setOptional(options.dddo, false)
+    DisplayAsDropDownListItem = set_optional(options.dadli, false)
+    DropDownReadOnly = set_optional(options.ddro, false)
+    DropDownDescriptionOnly = set_optional(options.dddo, false)
   end
   memory_record.DropDownList.Text = string_list
 end
@@ -215,12 +215,12 @@ function set_memory_record(memory_record, args_table, base_address, append_to_en
   local parent = append_to_entry or nil
 
   if debug_verbosity > 0 then
-    debugPrint(5, "Description : " .. description, nil, "setMemrec")
-    debugPrint(5, "Base address : " .. nb(base_address), nil, "setMemrec")
-    debugPrint(5, "Offset : " .. nb(offset), nil, "setMemrec")
+    debug_print(5, "Description : " .. description, nil, "setMemrec")
+    debug_print(5, "Base address : " .. nb(base_address), nil, "setMemrec")
+    debug_print(5, "Offset : " .. nb(offset), nil, "setMemrec")
   end
   if type(type_) == "string" then
-    debugPrint(5, "Type : " .. type_, nil, "setMemrec")
+    debug_print(5, "Type : " .. type_, nil, "setMemrec")
     if type_ == "header" then
       memory_record.type = 0
       memory_record.isGroupHeader = true
@@ -255,29 +255,29 @@ function set_memory_record(memory_record, args_table, base_address, append_to_en
     memory_record.Address = base_address + offset
   end
   if dropdown_linked then
-    debugPrint(5, "Dropdown linked : " .. dropdown_linked, nil, "setMemrec")
+    debug_print(5, "Dropdown linked : " .. dropdown_linked, nil, "setMemrec")
     memory_record.DropDownLinked = true
     memory_record.DropDownLinkedMemrec = dropdown_linked
   end
   if disallow_manual_user_input then
-    debugPrint(5, "Disallow manual user input", nil, "setMemrec")
+    debug_print(5, "Disallow manual user input", nil, "setMemrec")
     memory_record.DropDownReadOnly = true
   end
   if only_show_the_description_part then
-    debugPrint(5, "Only show the description part", nil, "setMemrec")
+    debug_print(5, "Only show the description part", nil, "setMemrec")
     memory_record.DropDownDescriptionOnly = true
   end
   if make_the_record_display_values_like_the_dropdown_list then
-    debugPrint(5, "Make the record display values like the dropdown list", nil, "setMemrec")
+    debug_print(5, "Make the record display values like the dropdown list", nil, "setMemrec")
     memory_record.DisplayAsDropDownListItem = true
   end
   if show_as_hex then
-    debugPrint(5, "Show as hexadecimal", nil, "setMemrec")
+    debug_print(5, "Show as hexadecimal", nil, "setMemrec")
     memory_record.ShowAsHex = true
   end
   if options then
     memory_record.Options = options
-    debugPrint(5, "Options : " .. string.pstring(options), nil, "setMemrec")
+    debug_print(5, "Options : " .. string.pstring(options), nil, "setMemrec")
   end
   if parent then
     memory_record.appendToEntry(parent)
@@ -297,7 +297,7 @@ function set_memory_record(memory_record, args_table, base_address, append_to_en
       --print("\n" .. string.pstring(description))
       --print("args_table : " .. string.pstring(args_table, "\n"))
       --print("\nCHILD ARGUMENTS: " .. string.pstring(child_arguments, "\n"))
-      debugPrint(8, "Child element : " .. string.pstring(child_arguments), nil, "setMemrec")
+      debug_print(8, "Child element : " .. string.pstring(child_arguments), nil, "setMemrec")
       set_memory_record(create_mr(), child_arguments, base_address, memory_record)
     end
   end
@@ -305,7 +305,7 @@ end
 
 function delayed_deactivate(memrec, wait_time)
   local t = createTimer()
-  t.Interval = setOptional(wait_time, 100)
+  t.Interval = set_optional(wait_time, 100)
   t.OnTimer = function(t)
     memrec.Active = false
     t.Destroy()

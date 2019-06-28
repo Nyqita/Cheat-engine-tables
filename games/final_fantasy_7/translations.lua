@@ -2585,7 +2585,7 @@ function update_dropdown_link_tables(options)
     return
   end
 
-  debugPrint(2, "Updating dropdown link tables", nil, "update_dropdown_link_tables")
+  debug_print(2, "Updating dropdown link tables", nil, "update_dropdown_link_tables")
   local lang = force_lang or current_lang
 
   for i = 1, #advanced_drop_down_links do
@@ -2606,7 +2606,7 @@ function update_dropdown_link_tables(options)
       end
       string_list = table.flatten(tables_)
     end
-    debugPrint(5,
+    debug_print(5,
             "Number list (" .. #number_list .. ")\n" .. string.pstring(number_list) .. "\nString list (" .. #string_list .. ")\n" .. string.pstring(string_list),
             nil, "update_dropdown_link_tables")
     local numbered_table = create_numbered_table(number_list, string_list)
@@ -2616,7 +2616,7 @@ function update_dropdown_link_tables(options)
 end
 
 function update_memrec_names()
-  debugPrint(2, "Updating memory record names (applying localisation)", nil, "update_dropdown_link_tables")
+  debug_print(2, "Updating memory record names (applying localisation)", nil, "update_dropdown_link_tables")
 
   for i = 1, #table_names do
     local mr = get_mr_desc(table_names[i].def)
@@ -2633,7 +2633,7 @@ function update_memrec_names()
 end
 
 function revert_memrec_names()
-  debugPrint(2, "Reverting memory record names to their defaults", nil, "revert_memrec_names")
+  debug_print(2, "Reverting memory record names to their defaults", nil, "revert_memrec_names")
   for i = 1, #table_names do
     local mr = get_mr_id(table_names[i].id)
     if mr then
@@ -2643,14 +2643,14 @@ function revert_memrec_names()
 end
 
 function load_translations()
-  debugPrint(2, "Loading translations and localisations", nil, "load_translations")
+  debug_print(2, "Loading translations and localisations", nil, "load_translations")
   set_data()
   update_memrec_names()
   update_dropdown_link_tables()
 end
 
 function unload_translations()
-  debugPrint(2, "Unloading translations and localisations", nil, "unload_translations")
+  debug_print(2, "Unloading translations and localisations", nil, "unload_translations")
   revert_memrec_names()
   current_lang = nil
 end

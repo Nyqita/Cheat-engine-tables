@@ -1,14 +1,14 @@
 function frequent_world_battles(auto_set)
   local freq_wb = createTimer(nil, false)
-  debugPrint(5, "Set", nil, "frequent_world_battles")
+  debug_print(5, "Set", nil, "frequent_world_battles")
   freq_wb.OnTimer = function()
     local can_occur = base_mem + cfg.random_battles_world_enabled
     local distance_occur = base_mem + cfg.random_battles_world_safe_distance
     local ticked_over = base_mem + cfg.random_battles_world_loop_count
-    debugPrint(5, "Activated", nil, "frequent_world_battles")
-    debugPrint(8, "World random encounters enabled : " .. nb(can_occur), nil, "frequent_world_battles")
-    debugPrint(8, "World random encounters safe distance : " .. nb(distance_occur), nil, "frequent_world_battles")
-    debugPrint(8, "World random encounters loop count : " .. nb(ticked_over), nil, "frequent_world_battles")
+    debug_print(5, "Activated", nil, "frequent_world_battles")
+    debug_print(8, "World random encounters enabled : " .. nb(can_occur), nil, "frequent_world_battles")
+    debug_print(8, "World random encounters safe distance : " .. nb(distance_occur), nil, "frequent_world_battles")
+    debug_print(8, "World random encounters loop count : " .. nb(ticked_over), nil, "frequent_world_battles")
     writeBytes(can_occur, 1)
     writeInteger(distance_occur, 0xF)
     writeBytes(ticked_over, 0xFF)

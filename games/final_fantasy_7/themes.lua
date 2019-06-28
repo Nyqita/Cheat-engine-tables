@@ -22,7 +22,7 @@ function theme_setter(theme_index)
   current_theme = (theme_index - 1) % total_themes + 1
   local theme = rgb_themes[current_theme]
   if debug_verbosity >= 1 then
-    debugPrint(1, "Applying theme #" .. current_theme)
+    debug_print(1, "Applying theme #" .. current_theme)
     recursive_print(theme)
   end
   local tl = { theme.tl.r, theme.tl.g, theme.tl.b }
@@ -61,7 +61,7 @@ function write_rgb(top_left, top_right, bottom_left, bottom_right)
   for key, value in pairs(rgb_cfg) do
     local address = value[1]
     local val = value[2]
-    debugPrint(3, "Writing RGB (" .. string.pstring(val) .. ") to " .. nb(address))
+    debug_print(3, "Writing RGB (" .. string.pstring(val) .. ") to " .. nb(address))
     writeBytes(address, val)
   end
   --print("done")

@@ -3,6 +3,32 @@
 -- i should have searched for other people's versions before spending so much time writing my own shitty code
 -- the above libraries should end up replacing most of this rubbish
 
+function merge_cells(cell_table_1, cell_table_2, how_to_handle_numbers, how_to_handle_strings, how_to_handle_tables)
+  assert(1 == 0, "Don't call merge_cells : not implemented")
+  -- iterate through first table and check for each element of the table if there is a corresponding element in the second table
+  -- if there are corresponding elements, how to handle them? are they both of the same type?
+  -- if they're both numbers, handle_numbers="x+y" or "x-y" or "x*y" ?
+end
+
+function matrix_maker(table_x_labels, table_x_data, table_y_labels, table_y_data, handle_numbers, handle_strings,
+    handle_tables)
+  assert(1 == 0, "Don't call matrix_maker : not implemented")
+  local out_table = {}
+  -- normalise in_tables
+  local table_x = create_shaped_table(table_x_data)
+  local table_y = create_shaped_table(table_y_data)
+  -- check that both in_tables are tables of tables
+
+  -- determine if there are elements of both tables that are likely to be the axis labels e.g. both have a key called "description"
+  -- better still, assert that there are labels for each axis. i'm too stupid to make this work efficiently
+
+  -- invoke merge_cells() and then assign to out_table.x_label[i].y_label[j] and out_table.y_label[j].x_label[i]
+  -- efficient way to preserve the order? unnecessary if i'm keeping a list of labels
+
+  -- return x_labels, x_table, y_labels, y_table
+  return
+end
+
 function merge_tables(t1, t2)
   assert(1 == 0, "Don't call merge_tables : not implemented")
   for k, v in pairs(t2) do
@@ -204,12 +230,12 @@ function recursive_print(s, l, i)
 end
 
 function multiply_table(in_table, multiplier)
-  debugPrint(5, "Called multiply_table()", nil, "multiply_table")
+  debug_print(5, "Called multiply_table()", nil, "multiply_table")
   -- used to calculate new offsets table
   -- e.g. multiplyTable ( { 1, 2, 3, 4} , 2 ) would return { 2, 4, 6, 8}
   local multiplied_table = {}
   for i = 1, #in_table do
-    debugPrint(7, "Iteration : " .. i .. "  Number : " .. in_table[i] .. "  Multiplier : " .. multiplier, nil,
+    debug_print(7, "Iteration : " .. i .. "  Number : " .. in_table[i] .. "  Multiplier : " .. multiplier, nil,
         "multiply_table")
     multiplied_table[i] = tonumber(in_table[i]) * multiplier
   end
@@ -217,7 +243,7 @@ function multiply_table(in_table, multiplier)
 end
 
 function add_tables(tables)
-  debugPrint(5, "Called add_tables()", nil, "add_tables")
+  debug_print(5, "Called add_tables()", nil, "add_tables")
   -- used to calculate new offsets table
   -- e.g. addTables ( { {1, 2, 3, 4}, {2, 4, 6, 8} } ) would return {3, 6, 8, 12}
   -- especially useful when calling multiplyTable()
@@ -237,9 +263,9 @@ function add_tables(tables)
   end
 
   for i = 1, #tables do
-    debugPrint(7, "Iteration : " .. i, nil, "add_tables")
+    debug_print(7, "Iteration : " .. i, nil, "add_tables")
     for j = 1, longest_table do
-      debugPrint(9, "Iteration : " .. i .. " : " .. j, nil, "add_tables")
+      debug_print(9, "Iteration : " .. i .. " : " .. j, nil, "add_tables")
       if tables[i][j] then
         summed_table[j] = summed_table[j] + tables[i][j]
       end
@@ -252,18 +278,18 @@ function create_shaped_table(in_table, remove_numbered_keys, force_lower_case_ke
   --assert(in_table[1], "create_shaped_table was passed an argument that was not a table") -- is this how asserts work?
   local rnk = remove_numbered_keys or false
   local flc = force_lower_case_keys or false
-  debugPrint(3, "Remove numbered keys : " .. tostring(rnk), nil, "create_shaped_table")
-  debugPrint(3, "Force lower case keys : " .. tostring(flc), nil, "create_shaped_table")
+  debug_print(3, "Remove numbered keys : " .. tostring(rnk), nil, "create_shaped_table")
+  debug_print(3, "Force lower case keys : " .. tostring(flc), nil, "create_shaped_table")
   if in_table[1] and in_table.shape then
     if debug_verbosity >= 3 then
       recursive_print(in_table)
     end
     local out_table = {}
     for i = 1, #in_table do
-      debugPrint(5, "Outer loop iteration : " .. i, nil, "create_shaped_table")
+      debug_print(5, "Outer loop iteration : " .. i, nil, "create_shaped_table")
       local sub_table = {}
       for key, value in pairs(in_table[i]) do
-        debugPrint(7, "Current key : " .. tostring(key) .. "  Type : " .. type(key) .. "  Value : " .. tostring(value),
+        debug_print(7, "Current key : " .. tostring(key) .. "  Type : " .. type(key) .. "  Value : " .. tostring(value),
             nil, "create_shaped_table")
         local new_key
         if rnk and type(key) == "number" then
@@ -274,17 +300,17 @@ function create_shaped_table(in_table, remove_numbered_keys, force_lower_case_ke
           new_key = key
         end
         if new_key then
-          debugPrint(7, "New key : " .. tostring(new_key), nil, "create_shaped_table")
+          debug_print(7, "New key : " .. tostring(new_key), nil, "create_shaped_table")
           sub_table[new_key] = value
         end
       end
       for j = 1, #in_table.shape do
-        debugPrint(7, "Inner loop iteration : " .. j, nil, "create_shaped_table")
+        debug_print(7, "Inner loop iteration : " .. j, nil, "create_shaped_table")
         local sub_val = in_table[i][j]
         local sub_key = in_table.shape[j]
         local new_sub_key
         --debugPrint(7, "{Key} " .. sub_key .. "  {Key type} " .. type(sub_key) .. "  {Value} " .. sub_val .. "  {Value type} " .. type(sub_val), nil, "create_shaped_table")
-        debugPrint(7,
+        debug_print(7,
             "Key : {" .. type(sub_key) .. "} [" .. sub_key .. "]  Value : (" .. type(sub_val) .. ") <" .. string.pstring(sub_val) .. ">",
             nil, "create_shaped_table")
         if flc then
@@ -292,7 +318,7 @@ function create_shaped_table(in_table, remove_numbered_keys, force_lower_case_ke
         else
           new_sub_key = sub_key
         end
-        debugPrint(7,
+        debug_print(7,
             "Setting new key : {" .. type(new_sub_key) .. "} [" .. new_sub_key .. "]  Value : (" .. type(sub_val) .. ") <" .. string.pstring(sub_val) .. ">",
             nil, "create_shaped_table")
         --debugPrint(7, "Setting new key : " .. new_sub_key, nil, "create_shaped_table")
@@ -334,7 +360,7 @@ function check_matching_values(in_dict, match_value)
 end
 
 function range_string_to_number_list(in_string)
-  debugPrint(9, "In string : " .. in_string, nil, "range_string_to_number_list")
+  debug_print(9, "In string : " .. in_string, nil, "range_string_to_number_list")
   local start_num, end_num
   local number_table = {}
   local iteration = 1
@@ -443,7 +469,7 @@ function create_numbered_table(number_list, string_list)
   end
   -- -- -- End test
   local out_table = {}
-  debugPrint(5, "Number list and string list", nil, "create_numbered_table")
+  debug_print(5, "Number list and string list", nil, "create_numbered_table")
   if debug_verbosity > 5 then
     recursive_print(number_list);
     recursive_print(string_list)

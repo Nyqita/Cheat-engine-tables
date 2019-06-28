@@ -1,5 +1,6 @@
 -- START_INCLUDE
-function debugSetter(debug_var)
+function debug_setter(debug_var)
+  local debug_var = debug_var or debug_verbosity
   local max_val = 10
   local min_val = 0
   local user_input = inputQuery(
@@ -26,20 +27,20 @@ function debugSetter(debug_var)
   return debug_var
 end
 
-function debugPrint(minimum_debug_level, debug_message, debug_level, invoker_name)
+function debug_print(minimum_debug_level, debug_message, debug_level, caller_name)
   local dbl = debug_level or debug_verbosity or 0
   local name
-  if invoker_name == nil then
+  if caller_name == nil then
     name = ""
   else
-    name = "[" .. invoker_name .. "]  "
+    name = "[" .. caller_name .. "]  "
   end
   if dbl >= minimum_debug_level then
     print(name .. debug_message)
   end
 end
 
-function printFunctionParameters(function_args, function_name)
+function print_function_parameters(function_args, function_name)
   local fn = function_name or "func"
   for key, value in pairs(function_args) do
     if type(value) == "table" then
@@ -60,8 +61,7 @@ function test_error(error_type)
 end
 
 function dumb_timer(function_name, run_iterations, ...)
-  debugPrint(1, "Called dumb_timer()", nil, "dumb_timer")
-  debugPrint(1, "Iterations : " .. run_iterations, nil, "dumb_timer")
+  debug_print(1, "Iterations : " .. run_iterations, nil, "dumb_timer")
   local start_time, end_time, test_time
   start_time = os.clock()
   for i = 1, run_iterations do
@@ -75,9 +75,9 @@ end
 function test_timer(function_name, test_iterations, print_result, ...)
   local iterations = test_iterations or 0
   local do_print = print_result or false
-  debugPrint(1, "Function name : " .. tostring(function_name), nil, "test_timer")
-  debugPrint(1, "Function iterations : " .. tostring(iterations), nil, "test_timer")
-  debugPrint(1, "Print : " .. tostring(do_print), nil, "test_timer")
+  debug_print(1, "Function name : " .. tostring(function_name), nil, "test_timer")
+  debug_print(1, "Function iterations : " .. tostring(iterations), nil, "test_timer")
+  debug_print(1, "Print : " .. tostring(do_print), nil, "test_timer")
   -- dynamic iterations
   if test_iterations == 0 then
     local base_ = 10

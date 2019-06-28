@@ -1,55 +1,27 @@
 function req(file_path)
   if allow_requires then
     local message = "Requiring file " .. file_path
-    debugPrint(2, message, nil, "req")
-    --print(message)
+    debug_print(2, message, nil, "req")
     require(file_path)
   else
     local message = "Doing file " .. file_path .. ".lua"
-    debugPrint(2, message, nil, "req")
-    --print(message)
+    debug_print(2, message, nil, "req")
     dofile(file_path .. ".lua")
   end
 end
 
 function add_req(file_path)
-  debugPrint(2, "Checking required_files for " .. file_path, nil, "add_req")
+  debug_print(2, "Checking required_files for " .. file_path, nil, "add_req")
   if required_files then
     for i = 1, #required_files do
       if file_path == required_files[i] then
         return
       end
     end
-    debugPrint(2, file_path .. " not found in list. Appending", nil, "add_req")
+    debug_print(2, file_path .. " not found in list. Appending", nil, "add_req")
     required_files[#required_files + 1] = file_path
   end
   req(file_path)
-end
-
-function mergeCells(cell_table_1, cell_table_2, how_to_handle_numbers, how_to_handle_strings, how_to_handle_tables)
-  assert(1 == 0, "Don't call mergeCells : not implemented")
-  -- iterate through first table and check for each element of the table if there is a corresponding element in the second table
-  -- if there are corresponding elements, how to handle them? are they both of the same type?
-  -- if they're both numbers, handle_numbers="x+y" or "x-y" or "x*y" ?
-end
-
-function matrixMaker(table_x_labels, table_x_data, table_y_labels, table_y_data, handle_numbers, handle_strings,
-    handle_tables)
-  assert(1 == 0, "Don't call matrixMaker : not implemented")
-  local out_table = {}
-  -- normalise in_tables
-  local table_x = create_shaped_table(table_x_data)
-  local table_y = create_shaped_table(table_y_data)
-  -- check that both in_tables are tables of tables
-
-  -- determine if there are elements of both tables that are likely to be the axis labels e.g. both have a key called "description"
-  -- better still, assert that there are labels for each axis. i'm too stupid to make this work efficiently
-
-  -- invoke mergeCells() and then assign to out_table.x_label[i].y_label[j] and out_table.y_label[j].x_label[i]
-  -- efficient way to preserve the order? unnecessary if i'm keeping a list of labels
-
-  -- return x_labels, x_table, y_labels, y_table
-  return
 end
 
 function set_defaults()
@@ -63,15 +35,9 @@ function script_path()
 end
 
 function rld()
-  --cls()
-  --print("Reloading files")
   for i = 1, #required_files do
     local fp = required_files[i]
-    --print(i .. " : " .. fp)
     req(fp)
-    --print("Loading " .. fp)
-    --dofile(fp .. ".lua")
-    --print(fp .. " has been loaded!")
   end
 end
 
@@ -137,9 +103,7 @@ function init()
   }
   dofile(root_dir .. 'lua/debug.lua')
   for i = 1, #required_files do
-    --print("Requiring " .. required_files[i])
     req(required_files[i])
-    --dofile(required_files[i] .. ".lua")
   end
 end
 
@@ -149,27 +113,25 @@ init()
 
 -- START_INCLUDE
 
-function checkCriteria(in_value, check_type, check_range, return_corrected_value)
+function check_criteria(in_value, check_type, check_range, return_corrected_value)
   local val_type = type(in_value)
   local range_min, range_max
   local check_type = check_type or ""
   local type_match = false
   local range_match = false
   local matches = false
-  debugPrint(9, "Value : " .. tostring(in_value), nil, "checkCriteria")
-  debugPrint(9, "Type : " .. val_type, nil, "checkCriteria")
+  debug_print(9, "Value : " .. tostring(in_value), nil, "check_criteria")
+  debug_print(9, "Type : " .. val_type, nil, "check_criteria")
   if type(check_range) == "table" then
     range_min, range_max = check_range[1], check_range[2]
   else
     range_min, range_max = 0, check_range
   end
-
   if check_type and val_type == string.lower(check_type) then
     type_match = true
   else
     type_match = true
   end
-
   if check_range then
     if (range_min <= in_value) and (range_max >= in_value) then
       range_match = true
@@ -177,19 +139,14 @@ function checkCriteria(in_value, check_type, check_range, return_corrected_value
   else
     range_match = true
   end
-
   if type_match and range_match then
     matches = true
   end
-
-  debugPrint(9, "Match type : " .. tostring(type_match) .. "  Match range : " .. tostring(range_max), nil,
-      "checkCriteria")
-  debugPrint(9, "Matches : " .. tostring(matches), nil, "checkCriteria")
-
+  debug_print(9, "Match type : " .. tostring(type_match) .. "  Match range : " .. tostring(range_max), nil, "check_criteria")
+  debug_print(9, "Matches : " .. tostring(matches), nil, "check_criteria")
   if return_corrected_value and type_match then
     local corrected_output
     if val_type == "number" then
-
       if in_value < range_min then
         corrected_output = range_min
       elseif in_value > range_max then
@@ -198,61 +155,45 @@ function checkCriteria(in_value, check_type, check_range, return_corrected_value
     elseif val_type == "string" then
       corrected_output = string.sub(in_value, 1, range_max)
     end
-
     return corrected_output
-
   else
     return matches
   end
 end
 
-function setOptional(var_to_check, default_value, force_type, force_range, allow_corrected)
+function set_optional(var_to_check, default_value, force_type, force_range, allow_corrected)
   -- check if var_to_check is a table or single value
-  debugPrint(5, "Checking : " .. tostring(var_to_check) .. "  Type : " .. type(var_to_check), nil, "setOptional")
+  debug_print(5, "Checking : " .. tostring(var_to_check) .. "  Type : " .. type(var_to_check), nil, "set_optional")
   if var_to_check == nil then
-    debugPrint(8, "Returning default : " .. tostring(default_value), nil, "setOptional")
+    debug_print(8, "Returning default : " .. tostring(default_value), nil, "set_optional")
     return default_value
   end
   -- if var_to_check is a table of checks, then iterate and return false if any don't match, else return true
   if type(var_to_check) == "table" and var_to_check.checklist then
     for i = 1, #var_to_check.checklist do
-      local check = checkCriteria(var_to_check.checklist[i], force_type, force_range)
+      local check = check_criteria(var_to_check.checklist[i], force_type, force_range)
       if check then
         if allow_corrected then
-          local out_var = checkCriteria(var_to_check.checklist[i], force_type, force_range, true)
-          debugPrint(8, "Returning : " .. tostring(out_var), nil, "setOptional")
+          local out_var = check_criteria(var_to_check.checklist[i], force_type, force_range, true)
+          debug_print(8, "Returning : " .. tostring(out_var), nil, "set_optional")
           return out_var
         end
-        debugPrint(8, "Returning : " .. tostring(var_to_check.checklist[i]), nil, "setOptional")
+        debug_print(8, "Returning : " .. tostring(var_to_check.checklist[i]), nil, "set_optional")
         return var_to_check.checklist[i]
       end
     end
   end
-  if checkCriteria(var_to_check, force_type, force_range) then
+  if check_criteria(var_to_check, force_type, force_range) then
     if allow_corrected then
-      local out_var = checkCriteria(var_to_check, force_type, force_range, allow_corrected)
-      debugPrint(8, "Returning : " .. tostring(out_var), nil, "setOptional")
+      local out_var = check_criteria(var_to_check, force_type, force_range, allow_corrected)
+      debug_print(8, "Returning : " .. tostring(out_var), nil, "set_optional")
       return out_var
     end
-    debugPrint(8, "Returning : " .. tostring(var_to_check), nil, "setOptional")
+    debug_print(8, "Returning : " .. tostring(var_to_check), nil, "set_optional")
     return var_to_check
   end
-  debugPrint(8, "Returning : nil", nil, "setOptional")
+  debug_print(8, "Returning : nil", nil, "set_optional")
   return nil
 end
-
--- globals
-is_ready = false
-ready_state = nil
-matches = true
-debug_verbosity = 0
-module_address = 0
-base_mem = 0
-allow_requires = false
-
-s_en = "[Enable]\n"
-s_dis = "[Disable]\n"
-s_lua = "{$lua}\n"
-s_asm = "{$asm}\n"
 
 -- STOP_INCLUDE

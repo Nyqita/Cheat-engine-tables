@@ -22,7 +22,6 @@ function guess_ps1_values(in_dict)
 end
 
 function guess_steam_values(in_dict)
-
   in_dict.random_battles_world_safe_distance = in_dict.random_battles_world or unimplemented
   in_dict.random_battles_world_loop_tick = in_dict.random_battles_world or unimplemented
   in_dict.random_battles_world_loop_count = in_dict.random_battles_world + 0xD or unimplemented
@@ -52,7 +51,6 @@ function guess_steam_values(in_dict)
   in_dict.chocobo_stats_1_base = in_dict.menu_stats_base + 0x6662
   in_dict.chocobo_stats_2_base = in_dict.menu_stats_base + 0x6786
   in_dict.config_menu_settings = in_dict.menu_stats_base + 0x6976
-
 end
 
 unimplemented = 0x7FFFFFFFFFFF
@@ -100,7 +98,6 @@ dv.debug_mode_2 = unimplemented
 dv.key_items = unimplemented
 dv.accessory_stats_base = unimplemented -- 00 FF 0A FF FF FF FF FF 00 00 00 00 FF 01 FE FF 01 FF 0A FF FF FF FF FF 00 00 00 00 FF 01 FE FF
 dv.accessory_stats_offset = 0x10
-
 
 -- "Final Fantasy VII (USA)" "SCUS_941.63;1", "SCUS_941.64;1", "SCUS_941.65;1"
 FF7_PSX_NTSC_US = deep_copy(default_values)
@@ -158,7 +155,6 @@ ff7_int.accessory_stats_base = 0x71A8C
 
 guess_ps1_values(ff7_int)
 
-
 -- Final Fantasy VII (UK) = {"SCES_008.67;1", "SCES_108.67;1", "SCES_208.67;1"}
 FF7_PSX_PAL_UK = deep_copy(default_values)
 ff7_uk = FF7_PSX_PAL_UK
@@ -182,7 +178,6 @@ ff7_uk.menu_rgb = 0x1D252C
 ff7_uk.accessory_stats_base = 0x71B08
 
 guess_ps1_values(ff7_uk)
-
 
 -- Final Fantasy VII Steam ( version 1.0.9 English )
 ff7_steam_ENGLISH_v_1_0_9 = deep_copy(default_values)

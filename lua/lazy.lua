@@ -1,4 +1,5 @@
 function handle_matrices(args)
+  -- todo this is a mess, start again?
   assert(1 == 0, "Don't call handle_matrices : not implemented")
   -- -- -- Begin test
   if args == "__test__" then
@@ -17,7 +18,7 @@ function handle_matrices(args)
   end
   -- -- -- End test
 
-  debugPrint(3, "Matrices tables:\n" .. string.pstring(matrices), nil, "lazyChildMaker")
+  debug_print(3, "Matrices tables:\n" .. string.pstring(matrices), nil, "handle_matrices")
   -------------------------------------------
   -- should receive tables like the following
   local char_names = {
@@ -142,7 +143,7 @@ function lazy_merge_cells(x_table, y_table)
   -- todo normalise key names first
   local out_table = xt
   for key, value in pairs(yt) do
-    debugPrint(9, "Old value : " .. tostring(value), nil, "mergeCells")
+    debug_print(9, "Old value : " .. tostring(value), nil, "mergeCells")
     local val_type = type(value)
     local new_value
     if val_type == "table" then
@@ -152,15 +153,13 @@ function lazy_merge_cells(x_table, y_table)
     elseif val_type == "string" then
       new_value = out_table[key] .. " | " .. yt[key]
     end
-    debugPrint(9, "New value : " .. new_value, nil, "mergeCells")
+    debug_print(9, "New value : " .. new_value, nil, "mergeCells")
     out_table[key] = new_value
   end
 end
 
 function lazy_tables_maker(labels_list, base_val, value_inc, value_name, label_name)
-  --assert(1 == 0, "Don't call lazy_tables_maker : not implemented")
   local out_table = {}
-  --out_table["keys_list"] = labels_list
   local base_value = base_val or 0
   local value_increment = value_inc or 1
   local value = value_name or "value"
@@ -176,7 +175,7 @@ end
 
 function lazy_matrix_maker(axis_1, axis_2)
   assert(1 == 0, "Don't call lazy_matrix_maker : not implemented")
-  -- todo THIS TURNED INTO A HUGE MESS. START FROM SCRATCH?
+  -- todo this is a mess, start again?
   local axis_x, axis_y
   local testing = false
   local old_debug_level = debug_
@@ -186,7 +185,7 @@ function lazy_matrix_maker(axis_1, axis_2)
     -- test tables show two types of expected table parameter
     -- e.g. a 'dumb' table with properties 'offsets' and 'descriptions' OR
     -- a 'smart' table containing tables, each sub-table having properties 'off', 'desc', etc.
-    print("[TEST] *** Running lazyMatrixMaker() in test mode ***")
+    print("[TEST] *** Running lazy_matrix_maker() in test mode ***")
     axis_x = { offsets = 0x80, descriptions = { "name1", "name2", "name3", } }
     axis_y = {
       { off = 0x0, desc = "attr1" },
@@ -198,9 +197,9 @@ function lazy_matrix_maker(axis_1, axis_2)
   end
 
   if debug_verbosity > 3 then
-    debugPrint(3, "Table X", nil, "lazyMatrixMaker")
+    debug_print(3, "Table X", nil, "lazy_matrix_maker")
     recursive_print(axis_x)
-    debugPrint(3, "Table Y", nil, "lazyMatrixMaker")
+    debug_print(3, "Table Y", nil, "lazy_matrix_maker")
     recursive_print(axis_y)
   end
 
@@ -213,11 +212,11 @@ function lazy_matrix_maker(axis_1, axis_2)
 
   if x_has_desc then
     --if axis_x.descriptions[1] then
-    debugPrint(5, "Axis X has descriptions table", nil, "lazyMatrixMaker")
+    debug_print(5, "Axis X has descriptions table", nil, "lazy_matrix_maker")
     axis_x_iterations = #axis_x.descriptions
     --end
   elseif type(axis_x[1]) == "table" then
-    debugPrint(5, "Axis X does not have descriptions table", nil, "lazyMatrixMaker")
+    debug_print(5, "Axis X does not have descriptions table", nil, "lazy_matrix_maker")
     axis_x_iterations = #axis_x
   else
     print("[ERROR] COULDN'T DETERMINE LENGTH OF AXIS X. YOU SHOULDN'T HAVE REACHED THIS CODE")
@@ -225,24 +224,24 @@ function lazy_matrix_maker(axis_1, axis_2)
 
   if y_has_desc then
     --if axis_y.descriptions[1] then
-    debugPrint(5, "Axis Y has descriptions table", nil, "lazyMatrixMaker")
+    debug_print(5, "Axis Y has descriptions table", nil, "lazy_matrix_maker")
     axis_y_iterations = #axis_y.descriptions
     --end
   elseif type(axis_y[1]) == "table" then
-    debugPrint(5, "Axis Y does not have descriptions table", nil, "lazyMatrixMaker")
+    debug_print(5, "Axis Y does not have descriptions table", nil, "lazy_matrix_maker")
     axis_y_iterations = #axis_y
   else
     print("[ERROR] COULDN'T DETERMINE LENGTH OF AXIS Y. YOU SHOULDN'T HAVE REACHED THIS CODE")
   end
 
-  debugPrint(5, "Axis X iterations : " .. nb(axis_x_iterations), nil, "lazyMatrixMaker")
-  debugPrint(5, "Axis Y iterations : " .. nb(axis_y_iterations), nil, "lazyMatrixMaker")
+  debug_print(5, "Axis X iterations : " .. nb(axis_x_iterations), nil, "lazy_matrix_maker")
+  debug_print(5, "Axis Y iterations : " .. nb(axis_y_iterations), nil, "lazy_matrix_maker")
   local tbl_1 = {}
   local tbl_2 = {}
 
   -- OUTER LOOP FOR X AXIS
   for i = 1, axis_x_iterations do
-    debugPrint(5, "Axis X iteration : " .. i, nil, "lazyMatrixMaker")
+    debug_print(5, "Axis X iteration : " .. i, nil, "lazy_matrix_maker")
     if x_has_desc then
       name_x = axis_x.descriptions[i]
     else
@@ -254,8 +253,8 @@ function lazy_matrix_maker(axis_1, axis_2)
     else
       offset_x = axis_x[i].off
     end
-    debugPrint(7, "X Name : " .. name_x, nil, "lazyMatrixMaker")
-    debugPrint(7, "X Offset : " .. offset_x, nil, "lazyMatrixMaker")
+    debug_print(7, "X Name : " .. name_x, nil, "lazy_matrix_maker")
+    debug_print(7, "X Offset : " .. offset_x, nil, "lazy_matrix_maker")
 
     tbl_1[name_x] = {}
 
@@ -273,8 +272,8 @@ function lazy_matrix_maker(axis_1, axis_2)
         offset_y = axis_y[j].off
       end
 
-      debugPrint(7, "Y Name : " .. name_y, nil, "lazyMatrixMaker")
-      debugPrint(7, "Y Offset : " .. offset_y, nil, "lazyMatrixMaker")
+      debug_print(7, "Y Name : " .. name_y, nil, "lazy_matrix_maker")
+      debug_print(7, "Y Offset : " .. offset_y, nil, "lazy_matrix_maker")
 
       if tbl_2[name_y] == nil then
         tbl_2[name_y] = {}
@@ -303,39 +302,38 @@ end
 -- START_INCLUDE
 
 function lazy_write_timer(args, timer_object)
-  local num_children = setOptional(args.number_of_children, 1, "number")
-  local base_address = setOptional(args.base_address, 0, "number")
-  local base_offset = setOptional(args.base_offset, 0, "number")
-  local base_increment = setOptional(args.base_increment, 4, "number")
-  local offset_increment = setOptional(args.offset_increment, 4, "number")
-  local base_value = setOptional(args.base_value, 99, "number")
-  local value_increment = setOptional(args.value_increment, 0, "number")
-  local write_interval = setOptional(args.write_interval, 100, "number", { 10, 60000 }, true)
-  local max_value = setOptional(args.max_value, 100, "number")
-  local min_value = setOptional(args.min_value, 1, "number")
-  local value_type = setOptional(args.type, 0, "number")
-  local values_table = setOptional(args.values_table, nil, "table")
+  local num_children = set_optional(args.number_of_children, 1, "number")
+  local base_address = set_optional(args.base_address, 0, "number")
+  local base_offset = set_optional(args.base_offset, 0, "number")
+  local base_increment = set_optional(args.base_increment, 4, "number")
+  local offset_increment = set_optional(args.offset_increment, 4, "number")
+  local base_value = set_optional(args.base_value, 99, "number")
+  local value_increment = set_optional(args.value_increment, 0, "number")
+  local write_interval = set_optional(args.write_interval, 100, "number", { 10, 60000 }, true)
+  local max_value = set_optional(args.max_value, 100, "number")
+  local min_value = set_optional(args.min_value, 1, "number")
+  local value_type = set_optional(args.type, 0, "number")
+  local values_table = set_optional(args.values_table, nil, "table")
 
   if debug_verbosity > 0 then
-    debugPrint(3, "Debug output for lazyWriteTimer function", nil, "lazyWriteTimer")
-    debugPrint(3, "Number of child entries : " .. nb(num_children), nil, "lazyWriteTimer")
-    debugPrint(3, "Base address : " .. nb(base_address), nil, "lazyWriteTimer")
-    debugPrint(3, "Base offset : " .. nb(base_offset), nil, "lazyWriteTimer")
-    debugPrint(3, "Base increment : " .. nb(base_increment), nil, "lazyWriteTimer")
-    debugPrint(3, "Offset increment : " .. nb(offset_increment), nil, "lazyWriteTimer")
-    debugPrint(3, "Offsets :", nil, "lazyWriteTimer")
-    debugPrint(3, string.pstring(offsets_table))
+    debug_print(3, "Number of child entries : " .. nb(num_children), nil, "lazy_write_timer")
+    debug_print(3, "Base address : " .. nb(base_address), nil, "lazy_write_timer")
+    debug_print(3, "Base offset : " .. nb(base_offset), nil, "lazy_write_timer")
+    debug_print(3, "Base increment : " .. nb(base_increment), nil, "lazy_write_timer")
+    debug_print(3, "Offset increment : " .. nb(offset_increment), nil, "lazy_write_timer")
+    debug_print(3, "Offsets :", nil, "lazy_write_timer")
+    debug_print(3, string.pstring(offsets_table))
     if debug_verbosity >= 3 then
       recursive_print(offsets_table)
     end
-    debugPrint(3, "Base value : " .. nb(base_value), nil, "lazyWriteTimer")
-    debugPrint(3, "Value increment :  " .. nb(value_increment), nil, "lazyWriteTimer")
-    debugPrint(3, "Minimum value : " .. nb(min_value), nil, "lazyWriteTimer")
-    debugPrint(3, "Maximum value : " .. nb(max_value), nil, "lazyWriteTimer")
+    debug_print(3, "Base value : " .. nb(base_value), nil, "lazy_write_timer")
+    debug_print(3, "Value increment :  " .. nb(value_increment), nil, "lazy_write_timer")
+    debug_print(3, "Minimum value : " .. nb(min_value), nil, "lazy_write_timer")
+    debug_print(3, "Maximum value : " .. nb(max_value), nil, "lazy_write_timer")
   end
 
-  local timer = setOptional(timer_object, createTimer(nil, false))
-  timer.Interval = setOptional(args.interval, write_interval)
+  local timer = set_optional(timer_object, createTimer(nil, false))
+  timer.Interval = set_optional(args.interval, write_interval)
   timer.OnTimer = function(timer)
     local cur_add
     local cur_val
@@ -344,7 +342,7 @@ function lazy_write_timer(args, timer_object)
       for i = 1, #values_table do
         cur_add = base_address + base_offset + values_table[i][1]
         cur_val = values_table[i][2]
-        debugPrint(5, "Address : " .. nb(cur_add) .. "  Value : " .. nb(cur_val), nil, "lazyWriteTimer")
+        debug_print(5, "Address : " .. nb(cur_add) .. "  Value : " .. nb(cur_val), nil, "lazy_write_timer")
         if value_type == 1 then
           writeSmallInteger(cur_add, cur_val)
         elseif value_type == 2 then
@@ -359,7 +357,7 @@ function lazy_write_timer(args, timer_object)
       for i = 0, num_children - 1 do
         cur_add = base_address + base_offset + (base_increment * i)
         cur_val = base_value + (value_increment * i)
-        debugPrint(5, "Address : " .. nb(cur_add) .. "  Value : " .. nb(cur_val), nil, "lazyWriteTimer")
+        debug_print(5, "Address : " .. nb(cur_add) .. "  Value : " .. nb(cur_val), nil, "lazy_write_timer")
         if value_type == 1 then
           writeSmallInteger(cur_add, cur_val)
         elseif value_type == 2 then
@@ -378,61 +376,61 @@ end
 
 function lazy_child_maker(args)
   if debug_verbosity > 9 then
-    printFunctionParameters(args, "lazyChildMaker")
+    print_function_parameters(args, "lazy_child_maker")
   end
   local par = args.parent
-  local num_children = setOptional(args.number_of_children, 3)
-  local base_address = setOptional(args.base_address, 0)
-  local base_offset = setOptional(args.base_offset, 0)
-  local base_increment = setOptional(args.base_increment, 0)
-  local offset_increment = setOptional(args.offset_increment, 4)
-  local offsets_table = setOptional(args.offsets, {})
-  local base_value = setOptional(args.base_value, 1)
-  local value_increment = setOptional(args.value_increment, 0)
-  local max_value = setOptional(args.max_value, 100)
-  local min_value = setOptional(args.min_value, 1)
-  local descr_table = setOptional(args.descriptions_list, {})
-  local matrices = setOptional(args.matrices, nil)
-  local args_table = setOptional(args.args_table, {})
-  local desc_prepend = setOptional(args.desc_prepend, "Entry ")
-  local desc_append = setOptional(args.desc_append, "")
-  local dropdown_linked = setOptional(args.dropdown_linked, nil)
+  local num_children = set_optional(args.number_of_children, 3)
+  local base_address = set_optional(args.base_address, 0)
+  local base_offset = set_optional(args.base_offset, 0)
+  local base_increment = set_optional(args.base_increment, 0)
+  local offset_increment = set_optional(args.offset_increment, 4)
+  local offsets_table = set_optional(args.offsets, {})
+  local base_value = set_optional(args.base_value, 1)
+  local value_increment = set_optional(args.value_increment, 0)
+  local max_value = set_optional(args.max_value, 100)
+  local min_value = set_optional(args.min_value, 1)
+  local descr_table = set_optional(args.descriptions_list, {})
+  local matrices = set_optional(args.matrices, nil)
+  local args_table = set_optional(args.args_table, {})
+  local desc_prepend = set_optional(args.desc_prepend, "Entry ")
+  local desc_append = set_optional(args.desc_append, "")
+  local dropdown_linked = set_optional(args.dropdown_linked, nil)
   -- Variable type reference: https://wiki.cheatengine.org/index.php?title=Lua:Class:MemoryRecord#Properties
-  local var_type = setOptional(args.type, 2)
-  local custom_type_name = setOptional(args.custom_type_name, nil)
-  local nested = setOptional(args.nested, nil)
-  local options = setOptional(args.options, nil)
-  local collapse_parent = setOptional(args.collapse_parent, false)
+  local var_type = set_optional(args.type, 2)
+  local custom_type_name = set_optional(args.custom_type_name, nil)
+  local nested = set_optional(args.nested, nil)
+  local options = set_optional(args.options, nil)
+  local collapse_parent = set_optional(args.collapse_parent, false)
 
   if descr_table[1] then
     num_children = #descr_table
   end
 
   if debug_verbosity > 0 then
-    debugPrint(3, "Debug output for LazyChildMaker function", nil, "lazyChildMaker")
-    debugPrint(1, "Trying to generate child entries for " .. par.description, nil, "lazyChildMaker")
-    debugPrint(1, "ID : " .. par.ID, nil, "lazyChildMaker")
-    debugPrint(3, "Number of child entries : " .. nb(num_children), nil, "lazyChildMaker")
-    debugPrint(3, "Base address : " .. nb(base_address), nil, "lazyChildMaker")
-    debugPrint(3, "Base offset : " .. nb(base_offset), nil, "lazyChildMaker")
-    debugPrint(3, "Base increment : " .. nb(base_increment), nil, "lazyChildMaker")
-    debugPrint(3, "Offset increment : " .. nb(offset_increment), nil, "lazyChildMaker")
-    debugPrint(3, "Offsets :", nil, "lazyChildMaker")
-    debugPrint(3, string.pstring(offsets_table))
+    debug_print(3, "Debug output for lazy_child_maker function", nil, "lazy_child_maker")
+    debug_print(1, "Trying to generate child entries for " .. par.description, nil, "lazy_child_maker")
+    debug_print(1, "ID : " .. par.ID, nil, "lazy_child_maker")
+    debug_print(3, "Number of child entries : " .. nb(num_children), nil, "lazy_child_maker")
+    debug_print(3, "Base address : " .. nb(base_address), nil, "lazy_child_maker")
+    debug_print(3, "Base offset : " .. nb(base_offset), nil, "lazy_child_maker")
+    debug_print(3, "Base increment : " .. nb(base_increment), nil, "lazy_child_maker")
+    debug_print(3, "Offset increment : " .. nb(offset_increment), nil, "lazy_child_maker")
+    debug_print(3, "Offsets :", nil, "lazy_child_maker")
+    debug_print(3, string.pstring(offsets_table))
     if debug_verbosity >= 3 then
       recursive_print(offsets_table)
     end
-    debugPrint(3, "Base value : " .. nb(base_value), nil, "lazyChildMaker")
-    debugPrint(3, "Value increment :  " .. nb(value_increment), nil, "lazyChildMaker")
-    debugPrint(3, "Minimum value : " .. nb(min_value), nil, "lazyChildMaker")
-    debugPrint(3, "Maximum value : " .. nb(max_value), nil, "lazyChildMaker")
-    debugPrint(3, "Descriptions list:", nil, "lazyChildMaker")
+    debug_print(3, "Base value : " .. nb(base_value), nil, "lazy_child_maker")
+    debug_print(3, "Value increment :  " .. nb(value_increment), nil, "lazy_child_maker")
+    debug_print(3, "Minimum value : " .. nb(min_value), nil, "lazy_child_maker")
+    debug_print(3, "Maximum value : " .. nb(max_value), nil, "lazy_child_maker")
+    debug_print(3, "Descriptions list:", nil, "lazy_child_maker")
     if debug_verbosity >= 3 then
       recursive_print(descr_table)
     end
-    debugPrint(3, string.pstring(descr_table))
-    debugPrint(3, "Size : " .. nb(var_type), nil, "lazyChildMaker")
-    debugPrint(3, "Nested : " .. tostring(nested), nil, "lazyChildMaker")
+    debug_print(3, string.pstring(descr_table))
+    debug_print(3, "Size : " .. nb(var_type), nil, "lazy_child_maker")
+    debug_print(3, "Nested : " .. tostring(nested), nil, "lazy_child_maker")
   end
 
   if matrices and (type(matrices) == "table") and pairs(matrices) then
@@ -441,7 +439,7 @@ function lazy_child_maker(args)
 
   if args_table[1] then
     if debug_verbosity > 3 then
-      debugPrint(3, "Arguments table length : " .. #args_table, nil, "lazyChildMaker")
+      debug_print(3, "Arguments table length : " .. #args_table, nil, "lazy_child_maker")
       recursive_print(args_table)
     end
     for i = 0, #args_table - 1 do
@@ -453,7 +451,7 @@ function lazy_child_maker(args)
   end
 
   for i = 0, num_children - 1 do
-    debugPrint(5, "Iteration : " .. nb(i), nil, "lazyChildMaker")
+    debug_print(5, "Iteration : " .. nb(i), nil, "lazy_child_maker")
     local e = getAddressList().createMemoryRecord()
     -- check if descr_table is a table of tables
     if type(descr_table[i + 1]) == "string" then
@@ -468,7 +466,7 @@ function lazy_child_maker(args)
     else
       cur_add = base_address + base_offset + (base_increment * i)
     end
-    debugPrint(5, "Address : " .. nb(cur_add), nil, "lazyChildMaker")
+    debug_print(5, "Address : " .. nb(cur_add), nil, "lazy_child_maker")
     e.address = cur_add
     local curval = nil
     if base_value then
@@ -478,7 +476,7 @@ function lazy_child_maker(args)
       end
     end
     if curval then
-      debugPrint(5, "Current value : " .. nb(curval), nil, "lazyChildMaker")
+      debug_print(5, "Current value : " .. nb(curval), nil, "lazy_child_maker")
       if args.base_value then
         if args.max_value or args.min_value then
           e.value = (curval % (1 + max_value - min_value)) + min_value
@@ -488,7 +486,7 @@ function lazy_child_maker(args)
       end
     end
     if offsets_table[1] then
-      debugPrint(1, "Offsets list has length greater than 0", nil, "lazyChildMaker")
+      debug_print(1, "Offsets list has length greater than 0", nil, "lazy_child_maker")
       e.address = base_address + base_offset
       e.setOffsetCount(#offsets_table)
       for j = 1, (#offsets_table) do
@@ -499,11 +497,11 @@ function lazy_child_maker(args)
     end
     local desc, off, type_
     if type(descr_table[i + 1]) == "table" then
-      debugPrint(
+      debug_print(
           3,
           "Description " .. i + 1 .. " is a table.  Length : " .. nb(#descr_table[i + 1]),
           nil,
-          "lazyChildMaker"
+          "lazy_child_maker"
       )
       if debug_verbosity >= 5 then
         recursive_print(descr_table[i + 1])
@@ -512,16 +510,16 @@ function lazy_child_maker(args)
       if #descr_table[i + 1] == 3 then
         -- assumes table is {offset, type, description}
         off, type_, desc = descr_table[i + 1][1], descr_table[i + 1][2], descr_table[i + 1][3]
-        debugPrint(
+        debug_print(
             7,
             "Offset : " .. nb(off) .. "  Type : " .. type_ .. "  Description : " .. desc,
             nil,
-            "lazyChildMaker"
+            "lazy_child_maker"
         )
       elseif #descr_table[i + 1] == 2 then
         -- assumes table is either {offset, description} or {description, offset}
         local first, second = descr_table[i + 1][1], descr_table[i + 1][2]
-        debugPrint(7, "First : " .. first .. "  Second : " .. second, nil, "lazyChildMaker")
+        debug_print(7, "First : " .. first .. "  Second : " .. second, nil, "lazy_child_maker")
 
         if ((type(first) == "number") and (type(second) == "string")) then
           off, desc = first, second
@@ -542,18 +540,18 @@ function lazy_child_maker(args)
       end
       e.description = desc
     end
-    debugPrint(5, "Type is : " .. type(type_) .. "  Value : " .. tostring(type_), nil, "lazyChildMaker")
+    debug_print(5, "Type is : " .. type(type_) .. "  Value : " .. tostring(type_), nil, "lazy_child_maker")
 
     if custom_type_name then
-      debugPrint(5, "Custom type is : " .. custom_type_name, nil, "lazyChildMaker")
+      debug_print(5, "Custom type is : " .. custom_type_name, nil, "lazy_child_maker")
       e.type = 13
       e.CustomTypeName = custom_type_name
     else
-      e.type = setOptional(type_, var_type)
+      e.type = set_optional(type_, var_type)
     end
 
     if dropdown_linked then
-      debugPrint(5, "Linked dropdown : " .. dropdown_linked, nil, "lazyChildMaker")
+      debug_print(5, "Linked dropdown : " .. dropdown_linked, nil, "lazy_child_maker")
       e.DropDownLinked = true
       e.DropDownLinkedMemrec = dropdown_linked
     end
@@ -568,7 +566,7 @@ function lazy_child_maker(args)
 
     if nested then
       local new_par = par.Child[i]
-      debugPrint(5, "Nesting inside child : (" .. new_par.ID .. ")  " .. new_par.Description, nil, "lazyChildMaker")
+      debug_print(5, "Nesting inside child : (" .. new_par.ID .. ")  " .. new_par.Description, nil, "lazy_child_maker")
       e.appendToEntry(new_par)
     else
       e.appendToEntry(par)
@@ -581,29 +579,28 @@ function lazy_child_deleter(memory_record, reset_options)
   --local res_op = reset_options or false
   local mr = memory_record
   -- Causes "TTreeNodes.GetNodeFromIndex Index SOMENUMBER out of bounds (Count=SOMENUMBER)" error when deactivating with space key, but NOT when deactivating with left mouse button
-  debugPrint(1, "Invoked lazyChildDeleter()", nil, "lazyChildDeleter")
-  debugPrint(2, "Deleting all child entries of (" .. mr.id .. ") " .. mr.description, nil, "lazyChildDeleter")
+  debug_print(2, "Deleting all child entries of (" .. mr.id .. ") " .. mr.description, nil, "lazy_child_deleter")
   local cnt = mr.Count
-  debugPrint(3, "Memory record children : " .. cnt, nil, "lazyChildDeleter", nil, "lazyChildDeleter")
+  debug_print(3, "Memory record children : " .. cnt, nil, "lazy_child_deleter", nil, "lazy_child_deleter")
   if cnt > 0 then
     local start_, end_ = 1, cnt
     -- mr.active = false
-    debugPrint(
+    debug_print(
         5,
         "For i = " .. start_ .. ", " .. end_ .. "  ( " .. (1 + end_ - start_) .. " )",
         nil,
-        "lazyChildDeleter"
+        "lazy_child_deleter"
     )
     for i = 1, cnt do
       local rec = mr.Child[0]
       local desc_ = rec.description
       local id_ = rec.id
-      debugPrint(7, "Iteration : " .. i, nil, "lazyChildDeleter")
-      debugPrint(8, "Deleting ID : " .. id_ .. "  Name : " .. desc_, nil, "lazyChildDeleter")
+      debug_print(7, "Iteration : " .. i, nil, "lazy_child_deleter")
+      debug_print(8, "Deleting ID : " .. id_ .. "  Name : " .. desc_, nil, "lazy_child_deleter")
       -- rec.Active = false
       -- memoryrecord_delete(rec)
       rec.destroy()
-      debugPrint(9, "Successfully destroyed (" .. id_ .. ") " .. desc_, nil, "lazyChildDeleter")
+      debug_print(9, "Successfully destroyed (" .. id_ .. ") " .. desc_, nil, "lazy_child_deleter")
     end
   end
   --if res_op then memory_record.Options = nil end
